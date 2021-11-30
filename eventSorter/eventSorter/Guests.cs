@@ -8,9 +8,17 @@ namespace eventSorter
 {
     class Guests
     {
-        public int id { get; set; }
-        public int typeOfGuest { get; set; }
-        public int age { get; set; }
-        public bool ontime { get; set; }
+        public int Id { get; set; }
+        public bool IsAdult { get; set; }
+        public int Age { get; set; }
+        public bool OnTime { get; set; }
+
+        public Guests(int id, bool isAdult, int age, bool onTime)
+        {
+            Id = id;
+            IsAdult = IsAdult;
+            Age = age;
+            OnTime = onTime;
+        }
     }
 }

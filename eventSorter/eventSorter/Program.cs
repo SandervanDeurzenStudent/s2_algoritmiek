@@ -14,17 +14,28 @@ namespace eventSorter
         {
             Event ev = new Event();
             List < Area > areaList = ev.makeAreas();
+            List < Guests > guestList = ev.makeGuests();
             Program p = new Program();
-            p.Show(areaList);
+            p.ShowAreas(areaList);
+            p.ShowGuests(guestList);
+            bool k = ev.checkAvailability(areaList, guestList);
+            Console.Read();
         }
-        public void Show(List<Area> areaList)
+        public void ShowAreas(List<Area> areaList)
         {
             foreach (var item in areaList)
             {
                 Console.WriteLine("Area " +item.id + " , amountOfRows " + item.amOfRows + ", seats " + item.amOfPlacesInRow);
                 Console.WriteLine("-------------------------");
             }
-            Console.Read();
+        }
+        public void ShowGuests(List<Guests> guestList)
+        {
+            foreach (var item in guestList)
+            {
+                Console.WriteLine("Guest " + item.Id + " , age " + item.Age + ", onetime? " + item.OnTime);
+                Console.WriteLine("-------------------------");
+            }
         }
     }
 }
