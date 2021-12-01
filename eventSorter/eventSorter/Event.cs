@@ -19,6 +19,7 @@ namespace eventSorter
             Random rnd = new Random();
             int rowsAmount = rnd.Next(1, 3);
             //making the areas with rows
+            
             for (int i = 1; i < 3; i++)
             {
                 //make the areas
@@ -42,16 +43,44 @@ namespace eventSorter
         public List<Guests> makeGuests()
         {
             Random rnd = new Random();
-            for (int i = 0; i < rnd.Next(1, 100); i++)
+            Random random = new Random();
+            for (int i = 0; i < rnd.Next(10, 100); i++)
             {
-                Guests guests = new Guests(i,  true, rnd.Next(1, 80), false);
-                guestsList.Add(guests);
+                if (random.Next(0, 100) < 40)
+                {
+                    Guests guests = new Guests(i, true, rnd.Next(1, 80), false);
+                    guestsList.Add(guests);
+                }
+                else
+                {
+                    Guests guests = new Guests(i, true, rnd.Next(1, 80), true);
+                    guestsList.Add(guests);
+                }
+            }
+
+            //gebruikers die onder 12 jaar zijn, wordt de isAdult op false gezet
+            for (int i = 0; i < guestsList.Count; i++)
+            {
+                if (guestsList[i].Age < 13)
+                {
+                    guestsList[i].IsAdult = false;
+                }
+
+                if (guestsList[i].OnTime == false)
+                {
+                    guestsList.RemoveAt(i);
+                }
             }
             return guestsList;
         }
 
         public bool checkAvailability(List<Area> areaList, List<Guests> guestList)
         {
+            //haal alle gebruikers die niet optijd zijn eruit en splits 
+
+
+
+            //check of alle bezoekers een plaats hebben
             int amountOfPlaces = 0;
             for (int i = 0; i < areaList.Count; i++)
             {
@@ -68,7 +97,15 @@ namespace eventSorter
             {
                 return true;
             }
-            
+        }
+
+        public void makeGroups(List<Guests> guestList)
+        {
+
+            //maak de groepen
+            //vul de groepen
+            //verwijder de mensen uit de guests lijst, de mensen die overblijven hebben geen groep.
+            int amountOfGuests = guestList.Count;
         }
     }
 }

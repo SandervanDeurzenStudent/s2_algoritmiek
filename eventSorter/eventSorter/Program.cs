@@ -16,9 +16,12 @@ namespace eventSorter
             List < Area > areaList = ev.makeAreas();
             List < Guests > guestList = ev.makeGuests();
             Program p = new Program();
+
+
             p.ShowAreas(areaList);
             p.ShowGuests(guestList);
             bool k = ev.checkAvailability(areaList, guestList);
+            ev.makeGroups(guestList);
             Console.Read();
         }
         public void ShowAreas(List<Area> areaList)
@@ -33,7 +36,7 @@ namespace eventSorter
         {
             foreach (var item in guestList)
             {
-                Console.WriteLine("Guest " + item.Id + " , age " + item.Age + ", onetime? " + item.OnTime);
+                Console.WriteLine("Guest " + item.Id + " , age " + item.Age + ", onetime? " + item.OnTime + "IsAdult?" + item.IsAdult);
                 Console.WriteLine("-------------------------");
             }
         }

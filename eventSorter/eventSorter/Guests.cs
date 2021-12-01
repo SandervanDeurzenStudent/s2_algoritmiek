@@ -16,7 +16,7 @@ namespace eventSorter
         public Guests(int id, bool isAdult, int age, bool onTime)
         {
             Id = id;
-            IsAdult = IsAdult;
+            IsAdult = isAdult;
             Age = age;
             OnTime = onTime;
         }
