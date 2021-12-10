@@ -11,9 +11,26 @@ namespace eventSorter
         //lijst van guests
         //groep moet adult hebben
         public int GroupId { get; set; }
+        public int MaxGroupSize { get; set; }
         public int AmountOfPeopleInGroup { get; set; }
-        public bool hasAdult { get; set; }
+        public bool HasAdult { get; set; }
 
-        List<Guests> GuestList = new List<Guests>();
+        public Guests[] GuestList { get; set; }
+
+        public Group(int id, int maxGroupSize ,int amOfPeopleInGroup, bool hasAdult, Guests[] guestList)
+        {
+            GroupId = id;
+            MaxGroupSize = maxGroupSize;
+            AmountOfPeopleInGroup = amOfPeopleInGroup;
+            HasAdult = hasAdult;
+            GuestList = guestList;
+        }
+        public Group(int id, int maxGroupSize, int amOfPeopleInGroup, bool hasAdult)
+        {
+            GroupId = id;
+            MaxGroupSize = maxGroupSize;
+            AmountOfPeopleInGroup = amOfPeopleInGroup;
+            HasAdult = hasAdult;
+        }
     }
 }

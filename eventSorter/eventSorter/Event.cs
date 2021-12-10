@@ -13,6 +13,8 @@ namespace eventSorter
         List<Area> areaList = new List<Area>();
         List<Area> areaList2 = new List<Area>();
         List<Guests> guestsList = new List<Guests>();
+        List<Group> groupList = new List<Group>();
+
 
         public List<Area> makeAreas()
         {
@@ -43,17 +45,17 @@ namespace eventSorter
         public List<Guests> makeGuests()
         {
             Random rnd = new Random();
-            Random random = new Random();
             for (int i = 0; i < rnd.Next(10, 100); i++)
             {
-                if (random.Next(0, 100) < 40)
+                //een 40% kans of de guest niet op tijd is
+                if (rnd.Next(0, 100) < 40)
                 {
-                    Guests guests = new Guests(i, true, rnd.Next(1, 80), false);
+                    Guests guests = new Guests(i, true, rnd.Next(1, 13), false, 0);
                     guestsList.Add(guests);
                 }
                 else
                 {
-                    Guests guests = new Guests(i, true, rnd.Next(1, 80), true);
+                    Guests guests = new Guests(i, true, rnd.Next(1, 13), true, 0);
                     guestsList.Add(guests);
                 }
             }
@@ -76,10 +78,6 @@ namespace eventSorter
 
         public bool checkAvailability(List<Area> areaList, List<Guests> guestList)
         {
-            //haal alle gebruikers die niet optijd zijn eruit en splits 
-
-
-
             //check of alle bezoekers een plaats hebben
             int amountOfPlaces = 0;
             for (int i = 0; i < areaList.Count; i++)
@@ -99,13 +97,49 @@ namespace eventSorter
             }
         }
 
-        public void makeGroups(List<Guests> guestList)
+        public Group[] FormGroupsAndExtract(List<Guests> guestList)
         {
+            Random _random = new Random();
+            int originalGuests = guestList.Count;
+            int groupId = 1;
+            int maxGroupSize = 5;
+            List<Group> guestGroups = new List<Group>();
 
-            //maak de groepen
-            //vul de groepen
-            //verwijder de mensen uit de guests lijst, de mensen die overblijven hebben geen groep.
-            int amountOfGuests = guestList.Count;
+            while (guestList.Count > maxGroupSize && guestList.Count > originalGuests / 10)
+            {
+                bool GroupHasAdult = false;
+                int groupSize = _random.Next(2, maxGroupSize);
+                Guests[] members = new Guests[groupSize];
+                for (int i = 0; i < groupSize; i++)
+                {
+                    Guests guest = guestList[_random.Next(guestList.Count)];
+                    if (guest.IsAdult == true)
+                    {
+                        GroupHasAdult = true;
+                    }
+                    members[i] = guest;
+                    members[i].GroupId = groupId;
+                    guestList.Remove(guest);
+                }
+
+                guestGroups.Add(new Group ( groupId, maxGroupSize, groupSize, GroupHasAdult, members));
+                groupId++;
+            }
+            //exclude al groups without an adult 
+
+            return guestGroups.ToArray();
+        }
+
+        public void FormSeats(List<Guests> guestList, List<Group> groupList, List<Area> areaList)
+        {
+            int amountOfPlaces = 0;
+            for (int i = 0; i < areaList.Count; i++)
+            {
+                for (int j = 0; j < areaList[i].amOfPlacesInRow; j++)
+                {
+                    amountOfPlaces++;
+                }
+            }
         }
     }
 }
