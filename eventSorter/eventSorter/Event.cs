@@ -140,6 +140,26 @@ namespace eventSorter
                     amountOfPlaces++;
                 }
             }
+        } 
+        public int CountFrontRowSeats(List<Area> areaList)
+        {
+            int amOfPlacesInFrontRow = 0;
+            for (int i = 0; i < areaList.Count; i++)
+            {
+                for (int j = 0; j < areaList[i].amOfPlacesInRow; j++)
+                {
+                    amOfPlacesInFrontRow++;
+                }
+
+                //for (int j = 0;  j < 2;  j++)
+                //{
+                //    for (int k = 0; k < areaList[i].amOfPlacesInRow; k++)
+                //    {
+                //       amOfPlacesInFrontRow =+ areaList[i].amOfPlacesInRow;
+                //    }
+                //}
+            }
+            return amOfPlacesInFrontRow;
         }
     }
 }
