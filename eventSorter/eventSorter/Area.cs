@@ -16,7 +16,5 @@ namespace eventSorter
             id = AreaId;
             amOfRows = AreaSize;
         }
-        
-
     }
 }

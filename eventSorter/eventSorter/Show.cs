@@ -15,6 +15,7 @@ namespace eventSorter
             List < Area > areaList = ev.makeAreas();
             List < Guests > guestList = ev.makeGuests();
             List<Rows> rowsList = ev.makeRows(areaList);
+            List<Seats> seatList = ev.makeSeats(rowsList);
             Show p = new Show();
 
             p.ShowAreas(areaList);
@@ -35,16 +36,29 @@ namespace eventSorter
         }
         public void ShowGuests( Group[] groups, List<Guests> guestList)
         {
-            //foreach (var item in guestList)
-            //{
-            //    Console.WriteLine("Guest " + item.Id + " , age " + item.Age + ", onetime? " + item.OnTime + ", IsAdult?" + item.IsAdult);
-            //    Console.WriteLine("-------------------------");
-            //}
+            
             foreach (var item in groups)
             {
                 Console.WriteLine("Group " + item.GroupId + " , amountOfPeople " + item.AmountOfPeopleInGroup + ", hasadult? " + item.HasAdult);
                 Console.WriteLine("-------------------------");
+                Console.WriteLine("-------------------------");
+                Console.WriteLine("");
+                foreach (var items in item.GuestList)
+                {
+                    Console.WriteLine("Guest " + items.Id + " , age " + items.Age + ", onetime? " + items.OnTime + ", IsAdult?" + items.IsAdult);
+                    Console.WriteLine("-------------------------");
+                    Console.WriteLine("");
+                }
+                Console.WriteLine("|||||||||||||||||||||||||||||||||||||||");
             }
+            Console.WriteLine("overige gasten");
+
+            foreach (var item in guestList)
+            {
+                Console.WriteLine("Guest " + item.Id + " , age " + item.Age + ", onetime? " + item.OnTime + ", IsAdult?" + item.IsAdult);
+                Console.WriteLine("-------------------------");
+            }
+
         }
     }
 }

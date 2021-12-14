@@ -20,10 +20,9 @@ namespace eventSorter
         public List<Area> makeAreas()
         {
             Random rnd = new Random();
-            int rowsAmount = rnd.Next(1, 3);
             //making the areas with rows
-            
-            for (int i = 1; i < 3; i++)
+
+            for (int i = 1; i < rnd.Next(1, 10); i++)
             {
                 //make the areas
                 Area area = new Area(i, rnd.Next(1, 3));
@@ -46,10 +45,27 @@ namespace eventSorter
             }
             return RowsList;
         }
+
+        public List<Seats> makeSeats(List<Rows> rowsList)
+        {
+            int seatId = 1;
+            Random random = new Random();
+            for (int i = 0; i < rowsList.Count; i++)
+            {
+                for (int j = 0; j < rowsList[i].amOfPlacesInRow; j++)
+                {
+                    Seats seats = new Seats(seatId, rowsList[i].id, rowsList[i].areaId);
+                    SeatsList.Add(seats);
+                    seatId++;
+                }
+            }
+            return SeatsList;
+        }
+
         public List<Guests> makeGuests()
         {
             Random rnd = new Random();
-            for (int i = 0; i < rnd.Next(10, 100); i++)
+            for (int i = 0; i < rnd.Next(20, 100); i++)
             {
                 //een 40% kans of de guest niet op tijd is
                 if (rnd.Next(0, 100) < 40)
@@ -72,6 +88,7 @@ namespace eventSorter
                     guestsList[i].IsAdult = false;
                 }
 
+                //gebruikers die niet op tijd zijn, worden uit de lijst gezet
                 if (guestsList[i].OnTime == false)
                 {
                     guestsList.RemoveAt(i);
@@ -126,7 +143,7 @@ namespace eventSorter
                     guestList.Remove(guest);
                 }
 
-                guestGroups.Add(new Group ( groupId, maxGroupSize, groupSize, GroupHasAdult, members));
+                guestGroups.Add(new Group(groupId, maxGroupSize, groupSize, GroupHasAdult, members));
                 groupId++;
             }
             //exclude al groups without an adult 
@@ -134,7 +151,7 @@ namespace eventSorter
             return guestGroups.ToArray();
         }
 
-        public void FormSeats(List<Guests> guestList, List<Group> groupList, List<Rows> rowList)
+        public void CountSeats(List<Guests> guestList, List<Group> groupList, List<Rows> rowList)
         {
             int amountOfPlaces = 0;
             for (int i = 0; i < rowList.Count; i++)
@@ -149,11 +166,16 @@ namespace eventSorter
         public int CountPlacesInFrontRow(List<Rows> rowList)
         {
             int amOfPlacesInFrontRow = 0;
+            int areaId = 0;
             for (int i = 0; i < rowList.Count; i++)
             {
-                for (int j = 0; j < rowList[i].amOfPlacesInRow; j++)
+                if (RowsList[i].areaId != areaId)
                 {
-                    amOfPlacesInFrontRow++;
+                    areaId = RowsList[i].areaId;
+                    for (int j = 0; j < rowList[i].amOfPlacesInRow; j++)
+                    {
+                        amOfPlacesInFrontRow++;
+                    }
                 }
             }
             return amOfPlacesInFrontRow;
