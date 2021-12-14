@@ -10,19 +10,13 @@ namespace eventSorter
     {
         public int id { get; set; }
         public int amOfRows { get; set; }
-        public int amOfPlacesInRow { get; set; }
 
         public Area(int AreaId, int AreaSize)
         {
             id = AreaId;
             amOfRows = AreaSize;
         }
-        public Area(int AreaId, int AreaSize, int amOfPlaces)
-        {
-            id = AreaId;
-            amOfRows = AreaSize;
-            amOfPlacesInRow = amOfPlaces;
-        }
+        
 
     }
 }

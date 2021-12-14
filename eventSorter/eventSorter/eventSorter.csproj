@@ -47,6 +47,7 @@
     <Compile Include="Event.cs" />
     <Compile Include="Group.cs" />
     <Compile Include="Guests.cs" />
+    <Compile Include="Seats.cs" />
     <Compile Include="Show.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rows.cs" />

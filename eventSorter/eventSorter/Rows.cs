@@ -9,12 +9,14 @@ namespace eventSorter
     class Rows
     {
         public int id { get; set; }
+        public int areaId { get; set; }
         public int amOfPlacesInRow { get; set; }
 
-        public Rows(int RowId, int RowSize)
+        public Rows(int RowId, int RowSize, int AreaId)
         {
             id = RowId;
             amOfPlacesInRow = RowSize;
+            areaId = AreaId;
         }
         // haal de lijst op van areas
         // for loop van het aantal rows van die lijst en daaruit een rnd van 3 tot 10 doen
