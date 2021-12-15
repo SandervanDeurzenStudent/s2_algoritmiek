@@ -65,17 +65,18 @@ namespace eventSorter
         public List<Guests> makeGuests()
         {
             Random rnd = new Random();
+            // maakt 20 tot 100 gasten aan
             for (int i = 0; i < rnd.Next(20, 100); i++)
             {
                 //een 40% kans of de guest niet op tijd is
                 if (rnd.Next(0, 100) < 40)
                 {
-                    Guests guests = new Guests(i, true, rnd.Next(1, 13), false, 0);
+                    Guests guests = new Guests(i, true, rnd.Next(1, 20), false, 0);
                     guestsList.Add(guests);
                 }
                 else
                 {
-                    Guests guests = new Guests(i, true, rnd.Next(1, 13), true, 0);
+                    Guests guests = new Guests(i, true, rnd.Next(1, 20), true, 0);
                     guestsList.Add(guests);
                 }
             }
@@ -88,6 +89,10 @@ namespace eventSorter
                     guestsList[i].IsAdult = false;
                 }
 
+                
+            }
+            for (int i = 0; i < guestsList.Count; i++)
+            {
                 //gebruikers die niet op tijd zijn, worden uit de lijst gezet
                 if (guestsList[i].OnTime == false)
                 {
@@ -179,6 +184,32 @@ namespace eventSorter
                 }
             }
             return amOfPlacesInFrontRow;
+        }
+
+        public void PlaceGroups(List<Group> grouplist, List<Seats> seatList)
+        {
+            bool hasKid;
+            for (int i = 0; i < grouplist.Count; i++)
+            {
+                //checks if group only has adults
+                for (int j = 0; j < grouplist[i].GuestList.Length; j++)
+                {
+                    if (groupList[i].GuestList[j].IsAdult == true)
+                    {
+                        bool hasKid = false;
+                    }
+                    else
+                    {
+                        hasKid = true;
+                        break;
+                    }
+                }
+
+
+            }
+                //checks if group has children
+                
+            
         }
     }
 }

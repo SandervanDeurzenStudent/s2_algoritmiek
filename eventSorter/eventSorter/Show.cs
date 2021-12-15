@@ -36,7 +36,7 @@ namespace eventSorter
         }
         public void ShowGuests( Group[] groups, List<Guests> guestList)
         {
-            
+
             foreach (var item in groups)
             {
                 Console.WriteLine("Group " + item.GroupId + " , amountOfPeople " + item.AmountOfPeopleInGroup + ", hasadult? " + item.HasAdult);
@@ -55,7 +55,7 @@ namespace eventSorter
 
             foreach (var item in guestList)
             {
-                Console.WriteLine("Guest " + item.Id + " , age " + item.Age + ", onetime? " + item.OnTime + ", IsAdult?" + item.IsAdult);
+                Console.WriteLine("Guest " + item.Id + " , age " + item.Age + ", IsAdult?" + item.IsAdult);
                 Console.WriteLine("-------------------------");
             }
 
