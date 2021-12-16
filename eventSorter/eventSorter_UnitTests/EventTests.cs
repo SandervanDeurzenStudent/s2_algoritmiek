@@ -17,7 +17,7 @@ namespace Tests
             //Assert.Pass();
         }
 
-
+        //Guests
         [Test]
         public void makeGuest_shouldmake_GuestList()
         {

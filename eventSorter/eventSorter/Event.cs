@@ -13,34 +13,39 @@ namespace eventSorter
         List<Area> areaList = new List<Area>();
         public List<Guests> guestsList = new List<Guests>();
         List<Group> groupList = new List<Group>();
-        List<Rows> RowsList = new List<Rows>();
+        
         List<Rows> EmptyList = new List<Rows>();
-        List<Seats> SeatsList = new List<Seats>();
+        
 
 
         public List<Area> MakeAreas()
         {
             Random rnd = new Random();
             //making the areas with rows
-            
-            for (int i = 0; i < 3; i++)
+            int i = 0;
+            for ( i = 0; i < rnd.Next(2, 5); i++)
             {
+                int numberOfSeats = rnd.Next(3, 10);
+                List<Rows> RowsList = new List<Rows>();
                 //make the Rows
-                for (int j = 0; j < 3; j++)
+                for (int j = 0; j < rnd.Next(1, 3); j++)
                 {
+                    
+                    List<Seats> SeatsList = new List<Seats>();
+                    for (int k = 0; k < numberOfSeats; k++)
+                    {
+                        SeatsList.Add(new Seats(k, j, i));
+                    }
                     Rows rows = new Rows(j, SeatsList, i);
                     RowsList.Add(rows);
                 }
-                
-                Area areas = new Area(i, RowsList);
-            }
 
+                areaList.Add(new Area(i, RowsList));
+            }
+            
             return areaList;
         }
-         //for (int k = 0; k<RowsList.Count; k++)
-         //           {
-         //               SeatsList.Add(new Seats(k, j, i));
-         //           }
+        
     public List<Rows> makeRows(List<Area> areasList)
         {
             //int rowId = 1;
