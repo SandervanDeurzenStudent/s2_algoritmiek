@@ -9,13 +9,12 @@ namespace eventSorter
      public class Event
     {
         public int PlacesAvailable { get; set; }
+        public List<Area> areaList = new List<Area>();
 
-        List<Area> areaList = new List<Area>();
+        public List<Group> groupList = new List<Group>();
         public List<Guests> guestsList = new List<Guests>();
-        List<Group> groupList = new List<Group>();
-        
-        List<Rows> EmptyList = new List<Rows>();
-        
+
+
 
 
         public List<Area> MakeAreas()
@@ -30,8 +29,8 @@ namespace eventSorter
                 //make the Rows
                 for (int j = 0; j < rnd.Next(1, 3); j++)
                 {
-                    
                     List<Seats> SeatsList = new List<Seats>();
+                    //make the seats
                     for (int k = 0; k < numberOfSeats; k++)
                     {
                         SeatsList.Add(new Seats(k, j, i));
@@ -39,47 +38,10 @@ namespace eventSorter
                     Rows rows = new Rows(j, SeatsList, i);
                     RowsList.Add(rows);
                 }
-
                 areaList.Add(new Area(i, RowsList));
             }
-            
             return areaList;
         }
-        
-    public List<Rows> makeRows(List<Area> areasList)
-        {
-            //int rowId = 1;
-            //Random random = new Random();
-            //for (int i = 0; i < areasList.Count; i++)
-            //{
-            //    for (int j = 0; j < areaList[i].amOfRows; j++)
-            //    {
-            //        Rows rows = new Rows(rowId, random.Next(3, 10), areaList[i].id);
-            //        RowsList.Add(rows);
-            //        rowId++;
-            //    }
-            //}
-            //return RowsList;
-            return null;
-        }
-
-        public List<Seats> makeSeats(List<Rows> rowsList)
-        {
-            //int seatId = 1;
-            //Random random = new Random();
-            //for (int i = 0; i < rowsList.Count; i++)
-            //{
-            //    for (int j = 0; j < rowsList[i].amOfPlacesInRow; j++)
-            //    {
-            //        Seats seats = new Seats(seatId, rowsList[i].id, rowsList[i].areaId);
-            //        SeatsList.Add(seats);
-            //        seatId++;
-            //    }
-            //}
-            //return SeatsList;
-            return null;
-        }
-
         public List<Guests> makeGuests()
         {
             Random rnd = new Random();
@@ -158,10 +120,10 @@ namespace eventSorter
                 for (int i = 0; i < groupSize; i++)
                 {
                     Guests guest = guestList[_random.Next(guestList.Count)];
-                    if (guest.IsAdult == true)
-                    {
-                        GroupHasAdult = true;
-                    }
+                    //if (guest.IsAdult == true)
+                    //{
+                    //    GroupHasAdult = true;
+                    //}
                     members[i] = guest;
                     members[i].GroupId = groupId;
                     guestList.Remove(guest);
@@ -170,9 +132,31 @@ namespace eventSorter
                 guestGroups.Add(new Group(groupId, maxGroupSize, groupSize, GroupHasAdult, members));
                 groupId++;
             }
-            //exclude al groups without an adult 
 
+
+            //the remaining guests go in to individual groups
+            
+              
+            while (guestList.Count != 0){
+                for (int i = 0; i < guestList.Count; i++)
+                {
+                    groupId++;
+                    //remaining guest are individual, so the group size is just 1.
+                    Guests[] member = new Guests[0];
+                    Guests guest = guestList[0];
+                    if (guest.IsAdult == true)
+                    {
+                        guestGroups.Add(new Group(groupId, 1, 1, true, member));
+                        guestList.Remove(guest);
+                    }
+                    else
+                    {
+                        guestList.Remove(guest);
+                    }
+                }
+            }
             return guestGroups.ToArray();
+
         }
 
         public void CountSeats(List<Guests> guestList, List<Group> groupList, List<Rows> rowList)

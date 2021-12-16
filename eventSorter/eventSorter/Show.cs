@@ -14,15 +14,14 @@ namespace eventSorter
             Event ev = new Event();
             List < Area > areaList = ev.MakeAreas();
             List < Guests > guestList = ev.makeGuests();
-            List<Rows> rowsList = ev.makeRows(areaList);
-            List<Seats> seatList = ev.makeSeats(rowsList);
+            
             Show p = new Show();
 
             p.ShowAreas(areaList);
             p.ShowGuests(ev.FormGroupsAndExtract(guestList), guestList);
-            bool k = ev.checkAvailability(rowsList, guestList);
+           // bool k = ev.checkAvailability(rowsList, guestList);
             ev.FormGroupsAndExtract(guestList);
-            ev.CountPlacesInFrontRow( rowsList);
+            //ev.CountPlacesInFrontRow( rowsList);
             Console.Read();
         }
 
