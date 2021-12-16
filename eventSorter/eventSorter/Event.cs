@@ -6,60 +6,73 @@ using System.Threading.Tasks;
 
 namespace eventSorter
 {
-    class Event
+     public class Event
     {
         public int PlacesAvailable { get; set; }
 
         List<Area> areaList = new List<Area>();
-        List<Guests> guestsList = new List<Guests>();
+        public List<Guests> guestsList = new List<Guests>();
         List<Group> groupList = new List<Group>();
         List<Rows> RowsList = new List<Rows>();
+        List<Rows> EmptyList = new List<Rows>();
         List<Seats> SeatsList = new List<Seats>();
 
 
-        public List<Area> makeAreas()
+        public List<Area> MakeAreas()
         {
             Random rnd = new Random();
             //making the areas with rows
-
-            for (int i = 1; i < rnd.Next(1, 10); i++)
+            
+            for (int i = 0; i < 3; i++)
             {
-                //make the areas
-                Area area = new Area(i, rnd.Next(1, 3));
-                areaList.Add(area);
+                //make the Rows
+                for (int j = 0; j < 3; j++)
+                {
+                    Rows rows = new Rows(j, SeatsList, i);
+                    RowsList.Add(rows);
+                }
+                
+                Area areas = new Area(i, RowsList);
             }
+
             return areaList;
         }
-        public List<Rows> makeRows(List<Area> areasList)
+         //for (int k = 0; k<RowsList.Count; k++)
+         //           {
+         //               SeatsList.Add(new Seats(k, j, i));
+         //           }
+    public List<Rows> makeRows(List<Area> areasList)
         {
-            int rowId = 1;
-            Random random = new Random();
-            for (int i = 0; i < areasList.Count; i++)
-            {
-                for (int j = 0; j < areaList[i].amOfRows; j++)
-                {
-                    Rows rows = new Rows(rowId, random.Next(3, 10), areaList[i].id);
-                    RowsList.Add(rows);
-                    rowId++;
-                }
-            }
-            return RowsList;
+            //int rowId = 1;
+            //Random random = new Random();
+            //for (int i = 0; i < areasList.Count; i++)
+            //{
+            //    for (int j = 0; j < areaList[i].amOfRows; j++)
+            //    {
+            //        Rows rows = new Rows(rowId, random.Next(3, 10), areaList[i].id);
+            //        RowsList.Add(rows);
+            //        rowId++;
+            //    }
+            //}
+            //return RowsList;
+            return null;
         }
 
         public List<Seats> makeSeats(List<Rows> rowsList)
         {
-            int seatId = 1;
-            Random random = new Random();
-            for (int i = 0; i < rowsList.Count; i++)
-            {
-                for (int j = 0; j < rowsList[i].amOfPlacesInRow; j++)
-                {
-                    Seats seats = new Seats(seatId, rowsList[i].id, rowsList[i].areaId);
-                    SeatsList.Add(seats);
-                    seatId++;
-                }
-            }
-            return SeatsList;
+            //int seatId = 1;
+            //Random random = new Random();
+            //for (int i = 0; i < rowsList.Count; i++)
+            //{
+            //    for (int j = 0; j < rowsList[i].amOfPlacesInRow; j++)
+            //    {
+            //        Seats seats = new Seats(seatId, rowsList[i].id, rowsList[i].areaId);
+            //        SeatsList.Add(seats);
+            //        seatId++;
+            //    }
+            //}
+            //return SeatsList;
+            return null;
         }
 
         public List<Guests> makeGuests()
@@ -105,22 +118,23 @@ namespace eventSorter
         public bool checkAvailability(List<Rows> rowList, List<Guests> guestList)
         {
             //check of alle bezoekers een plaats hebben
-            int amountOfPlaces = 0;
-            for (int i = 0; i < rowList.Count; i++)
-            {
-                for (int j = 0; j < rowList[i].amOfPlacesInRow; j++)
-                {
-                    amountOfPlaces++;
-                }
-            }
-            if (guestList.Count > amountOfPlaces)
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
+            //int amountOfPlaces = 0;
+            //for (int i = 0; i < rowList.Count; i++)
+            //{
+            //    for (int j = 0; j < rowList[i].amOfPlacesInRow; j++)
+            //    {
+            //        amountOfPlaces++;
+            //    }
+            //}
+            //if (guestList.Count > amountOfPlaces)
+            //{
+            //    return false;
+            //}
+            //else
+            //{
+            //    return true;
+            //}
+            return true;
         }
 
         public Group[] FormGroupsAndExtract(List<Guests> guestList)
@@ -158,37 +172,37 @@ namespace eventSorter
 
         public void CountSeats(List<Guests> guestList, List<Group> groupList, List<Rows> rowList)
         {
-            int amountOfPlaces = 0;
-            for (int i = 0; i < rowList.Count; i++)
-            {
-                for (int j = 0; j < rowList[i].amOfPlacesInRow; j++)
-                {
-                    amountOfPlaces++;
-                }
-            }
+            //int amountOfPlaces = 0;
+            //for (int i = 0; i < rowList.Count; i++)
+            //{
+            //    for (int j = 0; j < rowList[i].amOfPlacesInRow; j++)
+            //    {
+            //        amountOfPlaces++;
+            //    }
+            //}
         } 
 
         public int CountPlacesInFrontRow(List<Rows> rowList)
         {
             int amOfPlacesInFrontRow = 0;
-            int areaId = 0;
-            for (int i = 0; i < rowList.Count; i++)
-            {
-                if (RowsList[i].areaId != areaId)
-                {
-                    areaId = RowsList[i].areaId;
-                    for (int j = 0; j < rowList[i].amOfPlacesInRow; j++)
-                    {
-                        amOfPlacesInFrontRow++;
-                    }
-                }
-            }
+            //int areaId = 0;
+            //for (int i = 0; i < rowList.Count; i++)
+            //{
+            //    if (RowsList[i].areaId != areaId)
+            //    {
+            //        areaId = RowsList[i].areaId;
+            //        for (int j = 0; j < rowList[i].amOfPlacesInRow; j++)
+            //        {
+            //            amOfPlacesInFrontRow++;
+            //        }
+            //    }
+            //}
             return amOfPlacesInFrontRow;
         }
 
         public void PlaceGroups(List<Group> grouplist, List<Seats> seatList)
         {
-            bool hasKid;
+            bool hasKid = false;
             for (int i = 0; i < grouplist.Count; i++)
             {
                 //checks if group only has adults
@@ -196,7 +210,7 @@ namespace eventSorter
                 {
                     if (groupList[i].GuestList[j].IsAdult == true)
                     {
-                        bool hasKid = false;
+                       hasKid = false;
                     }
                     else
                     {
@@ -204,12 +218,11 @@ namespace eventSorter
                         break;
                     }
                 }
-
-
+                if (hasKid == false)
+                {
+                    //groep heeft geen kinderen, dus gelijk kijken of hij past
+                }
             }
-                //checks if group has children
-                
-            
         }
     }
 }

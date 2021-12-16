@@ -6,15 +6,14 @@ using System.Threading.Tasks;
 
 namespace eventSorter
 {
-    class Area
+    public class Area
     {
         public int id { get; set; }
-        public int amOfRows { get; set; }
-
-        public Area(int AreaId, int AreaSize)
+        public List<Rows> rowsList { get; set; }
+        public Area(int AreaId, List<Rows> RowsList)
         {
             id = AreaId;
-            amOfRows = AreaSize;
+            rowsList = RowsList;
         }
     }
 }

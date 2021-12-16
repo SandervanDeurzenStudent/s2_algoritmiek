@@ -12,7 +12,7 @@ namespace eventSorter
         static void Main(string[] args)
         {
             Event ev = new Event();
-            List < Area > areaList = ev.makeAreas();
+            List < Area > areaList = ev.MakeAreas();
             List < Guests > guestList = ev.makeGuests();
             List<Rows> rowsList = ev.makeRows(areaList);
             List<Seats> seatList = ev.makeSeats(rowsList);
@@ -30,8 +30,8 @@ namespace eventSorter
         {
             foreach (var item in areaList)
             {
-                Console.WriteLine("Area " +item.id + " , amountOfRows " + item.amOfRows + ", seats ");
-                Console.WriteLine("-------------------------");
+                //Console.WriteLine("Area " +item.id + " , amountOfRows " + item.amOfRows + ", seats ");
+                //Console.WriteLine("-------------------------");
             }
         }
         public void ShowGuests( Group[] groups, List<Guests> guestList)

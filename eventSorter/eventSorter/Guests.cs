@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace eventSorter
 {
-    class Guests
+    public class Guests
     {
         public int Id { get; set; }
         public bool IsAdult { get; set; }

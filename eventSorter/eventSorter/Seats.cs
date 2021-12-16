@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace eventSorter
 {
-    class Seats
+    public class Seats
     {
         public int Id { get; set; }
 

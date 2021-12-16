@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace eventSorter
 {
-    class Group
+    public class Group
     {
         //lijst van guests
         //groep moet adult hebben

@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 
 namespace eventSorter
 {
-    class Rows
+    public class Rows
     {
         public int id { get; set; }
         public int areaId { get; set; }
-        public int amOfPlacesInRow { get; set; }
+        public List<Seats> seatList { get; set; }
 
-        public Rows(int RowId, int RowSize, int AreaId)
+        public Rows(int RowId, List<Seats> SeatList, int AreaId)
         {
             id = RowId;
-            amOfPlacesInRow = RowSize;
+            seatList = SeatList;
             areaId = AreaId;
         }
         // haal de lijst op van areas
