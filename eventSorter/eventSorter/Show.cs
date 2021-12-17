@@ -21,7 +21,7 @@ namespace eventSorter
             p.ShowGuests(ev.FormGroupsAndExtract(guestList), guestList);
            // bool k = ev.checkAvailability(rowsList, guestList);
             ev.FormGroupsAndExtract(guestList);
-            //ev.CountPlacesInFrontRow( rowsList);
+            ev.CountPlacesInFrontRow(areaList);
             Console.Read();
         }
 

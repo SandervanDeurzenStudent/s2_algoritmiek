@@ -14,9 +14,6 @@ namespace eventSorter
         public List<Group> groupList = new List<Group>();
         public List<Guests> guestsList = new List<Guests>();
 
-
-
-
         public List<Area> MakeAreas()
         {
             Random rnd = new Random();
@@ -81,29 +78,6 @@ namespace eventSorter
             }
             return guestsList;
         }
-
-        public bool checkAvailability(List<Rows> rowList, List<Guests> guestList)
-        {
-            //check of alle bezoekers een plaats hebben
-            //int amountOfPlaces = 0;
-            //for (int i = 0; i < rowList.Count; i++)
-            //{
-            //    for (int j = 0; j < rowList[i].amOfPlacesInRow; j++)
-            //    {
-            //        amountOfPlaces++;
-            //    }
-            //}
-            //if (guestList.Count > amountOfPlaces)
-            //{
-            //    return false;
-            //}
-            //else
-            //{
-            //    return true;
-            //}
-            return true;
-        }
-
         public Group[] FormGroupsAndExtract(List<Guests> guestList)
         {
             Random _random = new Random();
@@ -111,7 +85,6 @@ namespace eventSorter
             int groupId = 1;
             int maxGroupSize = 5;
             List<Group> guestGroups = new List<Group>();
-
             while (guestList.Count > maxGroupSize && guestList.Count > originalGuests / 10)
             {
                 bool GroupHasAdult = false;
@@ -132,12 +105,9 @@ namespace eventSorter
                 guestGroups.Add(new Group(groupId, maxGroupSize, groupSize, GroupHasAdult, members));
                 groupId++;
             }
-
-
             //the remaining guests go in to individual groups
-            
-              
-            while (guestList.Count != 0){
+            while (guestList.Count != 0)
+            {
                 for (int i = 0; i < guestList.Count; i++)
                 {
                     groupId++;
@@ -158,37 +128,31 @@ namespace eventSorter
             return guestGroups.ToArray();
 
         }
-
-        public void CountSeats(List<Guests> guestList, List<Group> groupList, List<Rows> rowList)
+        public bool checkAvailability(List<Seats> seatsList, List<Guests> guestList)
         {
-            //int amountOfPlaces = 0;
-            //for (int i = 0; i < rowList.Count; i++)
-            //{
-            //    for (int j = 0; j < rowList[i].amOfPlacesInRow; j++)
-            //    {
-            //        amountOfPlaces++;
-            //    }
-            //}
-        } 
-
-        public int CountPlacesInFrontRow(List<Rows> rowList)
+            //check of alle bezoekers een plaats hebben
+            if (guestList.Count > seatsList.Count)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+        public int CountPlacesInFrontRow(List<Area> AreaList)
         {
             int amOfPlacesInFrontRow = 0;
-            //int areaId = 0;
-            //for (int i = 0; i < rowList.Count; i++)
-            //{
-            //    if (RowsList[i].areaId != areaId)
-            //    {
-            //        areaId = RowsList[i].areaId;
-            //        for (int j = 0; j < rowList[i].amOfPlacesInRow; j++)
-            //        {
-            //            amOfPlacesInFrontRow++;
-            //        }
-            //    }
-            //}
+            for (int i = 0; i < areaList.Count; i++)
+            {
+                for (int k = 0; k < 1; k++)
+                {
+                    amOfPlacesInFrontRow = amOfPlacesInFrontRow + areaList[i].rowsList[0].seatList.Count;
+                }
+                
+            }
             return amOfPlacesInFrontRow;
         }
-
         public void PlaceGroups(List<Group> grouplist, List<Seats> seatList)
         {
             bool hasKid = false;
