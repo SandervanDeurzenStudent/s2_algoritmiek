@@ -29,8 +29,17 @@ namespace eventSorter
         {
             foreach (var item in areaList)
             {
-                //Console.WriteLine("Area " +item.id + " , amountOfRows " + item.amOfRows + ", seats ");
-                //Console.WriteLine("-------------------------");
+                Console.WriteLine("AREA " + item.id);
+                foreach (var items in item.rowsList)
+                {
+                        Console.WriteLine("   ROW " + items.id);
+                        foreach (var itemss in items.seatList)
+                        {
+                            Console.WriteLine("     SEAT " + itemss.Id);
+                        }
+                        Console.WriteLine("_____________");
+                }
+                Console.WriteLine("______________________________________");
             }
         }
         public void ShowGuests( Group[] groups, List<Guests> guestList)
@@ -39,25 +48,24 @@ namespace eventSorter
             foreach (var item in groups)
             {
                 Console.WriteLine("Group " + item.GroupId + " , amountOfPeople " + item.AmountOfPeopleInGroup + ", hasadult? " + item.HasAdult);
-                Console.WriteLine("-------------------------");
-                Console.WriteLine("-------------------------");
+                Console.WriteLine("_________________");
                 Console.WriteLine("");
                 foreach (var items in item.GuestList)
                 {
-                    Console.WriteLine("Guest " + items.Id + " , age " + items.Age + ", onetime? " + items.OnTime + ", IsAdult?" + items.IsAdult);
-                    Console.WriteLine("-------------------------");
-                    Console.WriteLine("");
+                    if (items.IsAdult == true)
+                    {
+                        Console.WriteLine("Guest " + items.Id + " , age " + items.Age + ", onetime " + items.OnTime + " Adult ");
+                        Console.WriteLine("");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Guest " + items.Id + " , age " + items.Age + ", onetime " + items.OnTime + " Child");
+                        Console.WriteLine("");
+                    }
+                    
                 }
-                Console.WriteLine("|||||||||||||||||||||||||||||||||||||||");
+                Console.WriteLine("**************************************************************");
             }
-            Console.WriteLine("overige gasten");
-
-            foreach (var item in guestList)
-            {
-                Console.WriteLine("Guest " + item.Id + " , age " + item.Age + ", IsAdult?" + item.IsAdult);
-                Console.WriteLine("-------------------------");
-            }
-
         }
     }
 }
