@@ -16,12 +16,15 @@ namespace eventSorter
             List < Guests > guestList = ev.makeGuests();
             
             Show p = new Show();
+            ev.CountPlacesInFrontRow(areaList);
+            Group[] grouplist = ev.FormGroupsAndExtract(guestList);
+            ev.PlaceGroups(grouplist, areaList);
 
             p.ShowAreas(areaList);
             p.ShowGuests(ev.FormGroupsAndExtract(guestList), guestList);
            // bool k = ev.checkAvailability(rowsList, guestList);
-            ev.FormGroupsAndExtract(guestList);
-            ev.CountPlacesInFrontRow(areaList);
+            
+          
             Console.Read();
         }
 

@@ -93,10 +93,10 @@ namespace eventSorter
                 for (int i = 0; i < groupSize; i++)
                 {
                     Guests guest = guestList[_random.Next(guestList.Count)];
-                    //if (guest.IsAdult == true)
-                    //{
-                    //    GroupHasAdult = true;
-                    //}
+                    if (guest.IsAdult == true)
+                    {
+                        GroupHasAdult = true;
+                    }
                     members[i] = guest;
                     members[i].GroupId = groupId;
                     guestList.Remove(guest);
@@ -153,17 +153,39 @@ namespace eventSorter
             }
             return amOfPlacesInFrontRow;
         }
-        public void PlaceGroups(List<Group> grouplist, List<Seats> seatList)
+        public void PlaceGroups(Group[] groupList, List<Area> areaList)
         {
+            // count childrenn in group
+            for (int i = 0; i < groupList.Count(); i++)
+            {
+                int amountOfChildrenInGroup = 0;
+                for (int j = 0; j < groupList[i].GuestList.Count(); j++)
+                {
+                    if (groupList[i].GuestList[j].IsAdult == false)
+                    {
+                        amountOfChildrenInGroup++;
+                    }
+
+                }
+                groupList[i].AmountOfChildrenInGroup = amountOfChildrenInGroup;
+                
+            }
+            groupList = groupList.OrderByDescending(c => c.AmountOfChildrenInGroup).ToArray();
             bool hasKid = false;
-            for (int i = 0; i < grouplist.Count; i++)
+               //sorteer de groep van meeste kinderen naar minste X
+               // pak groep met meeste kinderen
+               // check of de groep een kind bevat
+               // passen de kinderen uit de groep in de voorste rij?
+               // past de groep in de area?
+
+            for (int i = 0; i < groupList.Count(); i++)
             {
                 //checks if group only has adults
-                for (int j = 0; j < grouplist[i].GuestList.Length; j++)
+                for (int j = 0; j < groupList[i].GuestList.Length; j++)
                 {
                     if (groupList[i].GuestList[j].IsAdult == true)
                     {
-                       hasKid = false;
+                        hasKid = false;
                     }
                     else
                     {
@@ -176,6 +198,8 @@ namespace eventSorter
                     //groep heeft geen kinderen, dus gelijk kijken of hij past
                 }
             }
+            //no more groups left
+
         }
     }
 }
