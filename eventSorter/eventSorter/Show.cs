@@ -17,7 +17,7 @@ namespace eventSorter
             
             Show p = new Show();
             ev.CountPlacesInFrontRow(areaList);
-            Group[] grouplist = ev.FormGroupsAndExtract(guestList);
+            List< Group > grouplist = ev.FormGroupsAndExtract(guestList);
             ev.PlaceGroups(grouplist, areaList);
 
             p.ShowAreas(areaList);
@@ -45,7 +45,7 @@ namespace eventSorter
                 Console.WriteLine("______________________________________");
             }
         }
-        public void ShowGuests( Group[] groups, List<Guests> guestList)
+        public void ShowGuests( List < Group> groups, List<Guests> guestList)
         {
 
             foreach (var item in groups)

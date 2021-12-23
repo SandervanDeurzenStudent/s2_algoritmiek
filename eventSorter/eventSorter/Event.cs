@@ -78,7 +78,7 @@ namespace eventSorter
             }
             return guestsList;
         }
-        public Group[] FormGroupsAndExtract(List<Guests> guestList)
+        public List<Group> FormGroupsAndExtract(List<Guests> guestList)
         {
             Random _random = new Random();
             int originalGuests = guestList.Count;
@@ -125,7 +125,7 @@ namespace eventSorter
                     }
                 }
             }
-            return guestGroups.ToArray();
+            return guestGroups;
 
         }
         public bool checkAvailability(List<Seats> seatsList, List<Guests> guestList)
@@ -153,9 +153,9 @@ namespace eventSorter
             }
             return amOfPlacesInFrontRow;
         }
-        public void PlaceGroups(Group[] groupList, List<Area> areaList)
+        public void PlaceGroups(List<Group> groupList, List<Area> areaList)
         {
-            // count childrenn in group
+            // count children in group
             for (int i = 0; i < groupList.Count(); i++)
             {
                 int amountOfChildrenInGroup = 0;
@@ -165,41 +165,74 @@ namespace eventSorter
                     {
                         amountOfChildrenInGroup++;
                     }
-
                 }
                 groupList[i].AmountOfChildrenInGroup = amountOfChildrenInGroup;
-                
             }
-            groupList = groupList.OrderByDescending(c => c.AmountOfChildrenInGroup).ToArray();
-            bool hasKid = false;
-               //sorteer de groep van meeste kinderen naar minste X
-               // pak groep met meeste kinderen
-               // check of de groep een kind bevat
-               // passen de kinderen uit de groep in de voorste rij?
-               // past de groep in de area?
+            //sorteer de groep van meeste kinderen naar minste X
+             groupList = groupList.OrderByDescending(x => x.AmountOfChildrenInGroup).ToList();
 
-            for (int i = 0; i < groupList.Count(); i++)
+
+
+
+            // passen de kinderen uit de groep in de voorste rij?
+            // past de groep in de area?
+            // pak groep met meeste kinderen x
+            for (int i = 0; i < groupList.Count; i++)
             {
                 //checks if group only has adults
-                for (int j = 0; j < groupList[i].GuestList.Length; j++)
-                {
-                    if (groupList[i].GuestList[j].IsAdult == true)
-                    {
-                        hasKid = false;
-                    }
-                    else
-                    {
-                        hasKid = true;
-                        break;
-                    }
-                }
-                if (hasKid == false)
+                if (groupList[i].AmountOfChildrenInGroup == 0)
                 {
                     //groep heeft geen kinderen, dus gelijk kijken of hij past
                 }
-            }
-            //no more groups left
+                //form places 
+                for (int j = 0; j < areaList.Count; j++)
+                {
+                    //only get the first row
+                    for (int k = 0; k < 1; k++)
+                    {
+                        bool EnoughPlacesOnFrontRow = false;
+                        bool SeatAvailable = false;
+                        //1st check the children
+                        if (areaList[j].rowsList[0].seatList.Count > groupList[i].AmountOfChildrenInGroup)
+                        {
+                            //the amount of seats in the front row of that area are more than the amount of children, so its OK!
+                            EnoughPlacesOnFrontRow = true;
 
+                        }
+                        else
+                        {
+                            break;
+                        }
+                        if (EnoughPlacesOnFrontRow == true)
+                        {
+                            //add guest to seat
+                            for (int l = 0; l < areaList[j].rowsList[0].seatList.Count; l++)
+                            {
+                                if (areaList[j].rowsList[0].seatList[l].seatTaken == false)
+                                {
+                                    for (int r = 0; r < groupList[i].GuestList.Count(); r++)
+                                    {
+                                        if (groupList[i].GuestList[r].IsAdult == false)
+                                        {
+                                            areaList[j].rowsList[0].seatList[l].Guest = groupList[i].GuestList[r];
+                                            areaList[j].rowsList[0].seatList[l].seatTaken = true;
+                                        }
+                                        else
+                                        {
+                                            break;
+                                        }
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    //goes trough all areas, at the end the group gets excluded
+                }
+                //EXCLUDE GROUP
+                groupList.RemoveAt(i);
+            }
+            //all groups are now empty and gone, every validate guest got a place
         }
     }
 }

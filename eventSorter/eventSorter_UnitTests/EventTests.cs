@@ -37,9 +37,9 @@ namespace Tests
             //arrange
             Event eventclass = new Event();
             //act
-            Group[] group =  eventclass.FormGroupsAndExtract(eventclass.makeGuests());
+            List <Group> group =  eventclass.FormGroupsAndExtract(eventclass.makeGuests());
             //assert
-            Assert.AreNotEqual(group.Length, 0);
+            Assert.AreNotEqual(group.Count, 0);
         }
 
         //CountPlaces

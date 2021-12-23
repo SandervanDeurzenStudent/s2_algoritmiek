@@ -14,11 +14,22 @@ namespace eventSorter
 
         public int Areaid { get; set; }
 
+        public Guests Guest { get; set; }
+
+        public bool seatTaken { get; set; }
+
         public Seats(int id, int rowId, int areaId)
         {
             Id = id;
             RowId = RowId;
             Areaid = areaId;
+        }
+        public Seats(int id, int rowId, int areaId, Guests guest)
+        {
+            Id = id;
+            RowId = RowId;
+            Areaid = areaId;
+            Guest = guest;
         }
     }
 }
