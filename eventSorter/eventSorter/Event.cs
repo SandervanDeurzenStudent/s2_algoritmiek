@@ -43,7 +43,7 @@ namespace eventSorter
         {
             Random rnd = new Random();
             // maakt 20 tot 100 gasten aan
-            for (int i = 0; i < rnd.Next(20, 100); i++)
+            for (int i = 1; i < rnd.Next(20, 101); i++)
             {
                 //een 40% kans of de guest niet op tijd is
                 if (rnd.Next(0, 100) < 40)
@@ -65,8 +65,6 @@ namespace eventSorter
                 {
                     guestsList[i].IsAdult = false;
                 }
-
-                
             }
             for (int i = 0; i < guestsList.Count; i++)
             {
@@ -149,7 +147,6 @@ namespace eventSorter
                 {
                     amOfPlacesInFrontRow = amOfPlacesInFrontRow + areaList[i].rowsList[0].seatList.Count;
                 }
-                
             }
             return amOfPlacesInFrontRow;
         }
@@ -171,68 +168,121 @@ namespace eventSorter
             //sorteer de groep van meeste kinderen naar minste X
              groupList = groupList.OrderByDescending(x => x.AmountOfChildrenInGroup).ToList();
 
-
-
-
-            // passen de kinderen uit de groep in de voorste rij?
-            // past de groep in de area?
-            // pak groep met meeste kinderen x
-            for (int i = 0; i < groupList.Count; i++)
+            for (int group = 0; group < groupList.Count; group++)
             {
                 //checks if group only has adults
-                if (groupList[i].AmountOfChildrenInGroup == 0)
+                if (groupList[group].AmountOfChildrenInGroup == 0)
                 {
                     //groep heeft geen kinderen, dus gelijk kijken of hij past
                 }
-                //form places 
-                for (int j = 0; j < areaList.Count; j++)
+                int amountOfTakenPlacesInFrontRow = 0;
+               
+                int amountOfAdultsInGroup = groupList[group].AmountOfPeopleInGroup - groupList[group].AmountOfChildrenInGroup;
+                bool EnoughPlacesOnFrontRowForChildren = false;
+                bool EnoughPlacesInAreaForAdults = false;
+                //form places on front row
+                for (int area = 0; area < areaList.Count; area++)
                 {
+                    
                     //only get the first row
-                    for (int k = 0; k < 1; k++)
+                    for (int row = 0; row < 1; row++)
                     {
-                        bool EnoughPlacesOnFrontRow = false;
-                        bool SeatAvailable = false;
-                        //1st check the children
-                        if (areaList[j].rowsList[0].seatList.Count > groupList[i].AmountOfChildrenInGroup)
+                        //List<Seats> avialableSeats = areaList[area].rowsList[row].seatList.Count -
+                        int amountOfTakenSeatsInFrontRow = 0;
+                        for (int seat = 0; seat < areaList[area].rowsList[row].seatList.Count; seat++)
                         {
-                            //the amount of seats in the front row of that area are more than the amount of children, so its OK!
-                            EnoughPlacesOnFrontRow = true;
-
-                        }
-                        else
-                        {
-                            break;
-                        }
-                        if (EnoughPlacesOnFrontRow == true)
-                        {
-                            //add guest to seat
-                            for (int l = 0; l < areaList[j].rowsList[0].seatList.Count; l++)
+                            if (areaList[area].rowsList[row].seatList[seat].seatTaken == true)
                             {
-                                if (areaList[j].rowsList[0].seatList[l].seatTaken == false)
-                                {
-                                    for (int r = 0; r < groupList[i].GuestList.Count(); r++)
-                                    {
-                                        if (groupList[i].GuestList[r].IsAdult == false)
-                                        {
-                                            areaList[j].rowsList[0].seatList[l].Guest = groupList[i].GuestList[r];
-                                            areaList[j].rowsList[0].seatList[l].seatTaken = true;
-                                        }
-                                        else
-                                        {
-                                            break;
-                                        }
-                                        break;
-                                    }
-                                }
+                                amountOfTakenSeatsInFrontRow++;
                             }
                         }
+                         
+                        // the amount of children in a group can not be higher than te amount of places in te front row
+                        if (amountOfTakenSeatsInFrontRow <= groupList[group].AmountOfChildrenInGroup)
+                        {
+                            EnoughPlacesOnFrontRowForChildren = true;
+                            //check for total amountofplacesinarea
+                        }
+                        break;
                     }
-                    //goes trough all areas, at the end the group gets excluded
+
+
+                    for (int row = 1; row < areaList[area].rowsList.Count; row++)
+                    {
+                        int amountOfTakenPlacesInAreaMinusFrontRow = 0;
+                        for (int seat = 0; seat < areaList[area].rowsList[row].seatList.Count; seat++)
+                        {
+                            if (areaList[area].rowsList[row].seatList[seat].seatTaken == true)
+                            {
+                                amountOfTakenPlacesInAreaMinusFrontRow++;
+                            }
+                        }
+
+                        // the amount of adults in a group can not be higher than te amount of places in the remaining rows
+                        if (amountOfTakenPlacesInAreaMinusFrontRow <= amountOfAdultsInGroup)
+                        {
+                            EnoughPlacesInAreaForAdults = true;
+                        }
+                        break;
+                    }
+                    if (EnoughPlacesOnFrontRowForChildren == true && EnoughPlacesInAreaForAdults == true)
+                    {
+                         //whole group can be placed in the area
+                         this.placeGroups(areaList[area], groupList[group]);
+                    }
                 }
-                //EXCLUDE GROUP
-                groupList.RemoveAt(i);
+               
+               //goes trough all areas, at the end the group gets excluded
+                
+               //EXCLUDE GROUP
+               groupList.RemoveAt(group);
             }
-            //all groups are now empty and gone, every validate guest got a place
         }
+        public void placeGroups(Area area, Group group)
+        {
+            int Guestnr = 0;
+            for (int i = 0; i < group.GuestList.Count(); i++)
+            {
+                if (group.GuestList[i].IsAdult == false)
+                {
+                    int guestId = 123451234;
+                    for (int j = 0; j < area.rowsList[0].seatList.Count; j++)
+                    {
+                        
+                        if (area.rowsList[0].seatList[j].seatTaken == false && group.GuestList[i].TakenSeatId != guestId)
+                        {
+                            group.GuestList[i].TakenSeatId = area.rowsList[0].seatList[j].Id;
+                            guestId = area.rowsList[0].seatList[j].Id;
+                            area.rowsList[0].seatList[j].seatTaken = true;
+                            
+                        }
+
+                    }
+                }
+                //else
+                //{
+                //    for (int k = 0; k < area.rowsList.Count; k++)
+                //    {
+                //        for (int j = 0; j < area.rowsList[j].seatList.Count; j++)
+                //        {
+                //            if (area.rowsList[k].seatList[j].seatTaken == false && group.GuestList[i].TakenSeatId != 0)
+                //            {
+                //                group.GuestList[Guestnr].TakenSeatId = area.rowsList[k].seatList[j].Id;
+                //                area.rowsList[k].seatList[j].seatTaken = true;
+                //                Guestnr++;
+                //            }
+                //        }
+                //    }
+                    
+                //}
+            }
+
+        }
+
+        public void k(Guests guest, Seats seat)
+        {
+
+        }
+        
     }
 }

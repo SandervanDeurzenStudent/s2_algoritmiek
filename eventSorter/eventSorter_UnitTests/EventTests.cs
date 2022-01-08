@@ -18,6 +18,17 @@ namespace Tests
             //assert
             Assert.AreNotEqual(eventclass.guestsList.Count, 0);
         }
+
+        [Test]
+        public void makeGuest_shouldReturn_Null()
+        {
+            //arrange
+            Event eventclass = new Event();
+            //act
+            eventclass.makeGuests();
+            //assert
+            Assert.AreNotEqual(eventclass.guestsList.Count, 0);
+        }
         //Make area
         [Test]
         public void makeAreas_shouldmake_GuestList()

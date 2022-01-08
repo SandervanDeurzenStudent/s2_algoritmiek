@@ -13,6 +13,7 @@ namespace eventSorter
         public int Age { get; set; }
         public bool OnTime { get; set; }
         public int GroupId { get; set; }
+        public int TakenSeatId { get; set; }
 
         public Guests()
         {

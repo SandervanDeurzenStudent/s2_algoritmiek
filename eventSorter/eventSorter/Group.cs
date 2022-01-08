@@ -14,7 +14,6 @@ namespace eventSorter
         public int MaxGroupSize { get; set; }
         public int AmountOfPeopleInGroup { get; set; }
         public bool HasAdult { get; set; }
-
         public int AmountOfChildrenInGroup { get; set; }
         public Guests[] GuestList { get; set; }
 
