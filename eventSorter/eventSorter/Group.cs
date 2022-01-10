@@ -11,35 +11,42 @@ namespace eventSorter
         //lijst van guests
         //groep moet adult hebben
         public int GroupId { get; set; }
-        public int MaxGroupSize { get; set; }
-        public int AmountOfPeopleInGroup { get; set; }
-        public bool HasAdult { get; set; }
-        public int AmountOfChildrenInGroup { get; set; }
-        public Guests[] GuestList { get; set; }
+        public List<Guests> GuestList { get; set; }
+        private int AmountOfChildrenInGroup { get; set; }
 
-        public Group(int id, int maxGroupSize ,int amOfPeopleInGroup, bool hasAdult, Guests[] guestList)
+        public Group(int id,  List<Guests> guestList)
         {
             GroupId = id;
-            MaxGroupSize = maxGroupSize;
-            AmountOfPeopleInGroup = amOfPeopleInGroup;
-            HasAdult = hasAdult;
             GuestList = guestList;
         }
-        public Group(int id, int maxGroupSize, int amOfPeopleInGroup, bool hasAdult, int amountOfChildrenInGroup, Guests[] guestList)
+        public Group()
         {
-            GroupId = id;
-            MaxGroupSize = maxGroupSize;
-            AmountOfPeopleInGroup = amOfPeopleInGroup;
-            HasAdult = hasAdult;
-            AmountOfChildrenInGroup = amountOfChildrenInGroup;
-            GuestList = guestList;
         }
-        public Group(int id, int maxGroupSize, int amOfPeopleInGroup, bool hasAdult)
+        public bool hasParent(Group guestGroup)
         {
-            GroupId = id;
-            MaxGroupSize = maxGroupSize;
-            AmountOfPeopleInGroup = amOfPeopleInGroup;
-            HasAdult = hasAdult;
+            //if (guestClass.checkForAdult(guest) == true)
+            //{
+            //    GroupHasAdult = true;
+            //}
+            return true;
+        }
+        public List<Group> CountChildrenInGroup(List<Group> groupList)
+        {
+            Guests guestClass = new Guests();
+            for (int i = 0; i < groupList.Count(); i++)
+            {
+                int amountOfChildrenInGroup = 0;
+                for (int j = 0; j < groupList[i].GuestList.Count(); j++)
+                {
+                    if (guestClass.checkForAdult(groupList[i].GuestList[j]) == false)
+                    {
+                        amountOfChildrenInGroup++;
+                    }
+                }
+                groupList[i].AmountOfChildrenInGroup = amountOfChildrenInGroup;
+            }
+            //sorteer de groep van meeste kinderen naar minste X
+            return groupList.OrderByDescending(x => x.AmountOfChildrenInGroup).ToList();
         }
     }
 }

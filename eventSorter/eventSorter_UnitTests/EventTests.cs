@@ -31,7 +31,17 @@ namespace Tests
         }
         //Make area
         [Test]
-        public void makeAreas_shouldmake_GuestList()
+        public void makeAreas_shouldmake_AreaList()
+        {
+            //arrange
+            Event eventclass = new Event();
+            //act
+            List<Area> area = eventclass.MakeAreas();
+            //assert
+            Assert.AreNotEqual(area.Count, 0);
+        }
+        [Test]
+        public void makeAreas_shouldgive_exception()
         {
             //arrange
             Event eventclass = new Event();
@@ -41,6 +51,7 @@ namespace Tests
             Assert.AreNotEqual(area.Count, 0);
         }
 
+
         //Make groups
         [Test]
         public void makeGroups_shouldmake_Groups()
@@ -48,21 +59,9 @@ namespace Tests
             //arrange
             Event eventclass = new Event();
             //act
-            List <Group> group =  eventclass.FormGroupsAndExtract(eventclass.makeGuests());
+            List <Group> group =  eventclass.MakeGroups(eventclass.makeGuests());
             //assert
             Assert.AreNotEqual(group.Count, 0);
-        }
-
-        //CountPlaces
-        [Test]
-        public void CountFrontRowPlaces_should_returnAmount()
-        {
-            //arrange
-            Event eventclass = new Event();
-            //act
-            int numberOfPlaces = eventclass.CountPlacesInFrontRow(eventclass.MakeAreas());
-            //assert
-            Assert.AreNotEqual(numberOfPlaces, 0);
         }
 
         //checkAvailability
@@ -88,6 +87,19 @@ namespace Tests
             bool enoughPlaces = eventclass.checkAvailability(eventMockups.FalseseatsList, eventMockups.guestList);
             //assert
             Assert.IsFalse(enoughPlaces);
+        }
+
+        //addgroupsToList
+        [Test]
+        public void addGroupsToSeats_should_returnList()
+        {
+            //arrange
+            Event eventclass = new Event();
+            EventMockups eventMockups = new EventMockups();
+            //act
+           // bool enoughPlaces = eventclass.addGroupsToSeats(eventMockups.areaList[0], eventMockups.gro);
+            //assert
+            //Assert.IsFalse(enoughPlaces);
         }
     }
 }

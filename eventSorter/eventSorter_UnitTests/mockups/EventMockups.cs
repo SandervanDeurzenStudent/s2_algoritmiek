@@ -8,6 +8,7 @@ namespace eventSorter_UnitTests.mockups
     public class EventMockups
     {
         public List<Guests> guestList = new List<Guests>();
+        public List<Group> groupList = new List<Group>();
         public List<Area> areaList = new List<Area>();
         public List<Seats> seatsList = new List<Seats>();
         public List<Seats> FalseseatsList = new List<Seats>();
@@ -17,7 +18,8 @@ namespace eventSorter_UnitTests.mockups
             guestList.Add(new Guests(2, true, 13, false, 1));
             guestList.Add(new Guests(3, true, 13, true, 2));
             guestList.Add(new Guests(4, false, 13, false, 2));
-
+            
+            
             //area
             //first make seats and rows
             List<Rows> rowsList = new List<Rows>();
@@ -52,6 +54,7 @@ namespace eventSorter_UnitTests.mockups
             areaList.Add(new Area(2, rowsList));
 
         }
+
        
     }
 }
