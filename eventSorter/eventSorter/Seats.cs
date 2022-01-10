@@ -9,13 +9,9 @@ namespace eventSorter
     public class Seats
     {
         public int Id { get; set; }
-
         public int RowId { get; set; }
-
         public int Areaid { get; set; }
-
         public Guests Guest { get; set; }
-
         public bool seatTaken { get; set; }
 
         public Seats(int id, int rowId, int areaId)

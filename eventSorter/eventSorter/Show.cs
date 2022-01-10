@@ -11,18 +11,19 @@ namespace eventSorter
     {
         static void Main(string[] args)
         {
+            Show show = new Show();
             Group group = new Group();
             AreaContainer areaContainer = new AreaContainer();
             GroupContainer groupContainer = new GroupContainer();
             
             List < Area > areaList = areaContainer.MakeAreas();
             List< Group > grouplist = groupContainer.MakeGroups(group.makeGuests());
-
+            show.ShowGuests(grouplist);
             Event ev = new Event();
             ev.PlaceGroups(grouplist, areaList);
 
-            Show show = new Show();
-            show.ShowGuests(grouplist);
+            
+           
             show.ShowAreas(areaList);
             
             Console.Read();

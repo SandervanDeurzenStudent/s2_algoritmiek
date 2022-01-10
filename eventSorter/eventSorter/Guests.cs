@@ -31,7 +31,6 @@ namespace eventSorter
         {
             return "Guest " + Id + ": " + "On Time: " + OnTime + " - " + "Is Adult: " + IsAdult + " - " + "Group ID: " + GroupId + " takenSeatId " + TakenSeatId;
         }
-
         public bool checkForAdult(Guests guest)
         {
             if (guest.Age > 12)
@@ -57,32 +56,5 @@ namespace eventSorter
 
             }
         }
-
-        //public bool FormGroups(List<Guests> guestList)
-        //{
-        //    List<Group> guestGroups = new List<Group>();
-        //    int count = 0;
-
-        //    for (int i = 0; i < guestList.Count; i++)
-        //    {
-        //        List<Guests> guests = new List<Guests>();
-
-        //        if (guestList[i].GroupId == count)
-        //        {
-                    
-        //            count++;
-        //        }
-        //        else
-        //        {
-                        
-        //        }
-               
-        //    }
-        //    for (int i = 0; i < count; i++)
-        //    {
-        //        guestGroups.Add(new Group(i, guestList));
-        //    }
-        //    return true;
-        //}
     }
 }

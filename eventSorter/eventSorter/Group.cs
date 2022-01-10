@@ -34,15 +34,14 @@ namespace eventSorter
             //}
             return true;
         }
-
         public List<Guests> makeGuests()
         {
             Random rnd = new Random();
             // maakt 20 tot 100 gasten aan
-            for (int i = 1; i < rnd.Next(20, 101); i++)
+            for (int i = 1; i < rnd.Next(40, 101); i++)
             {
-                //een 40% kans of de guest niet op tijd is
-                if (rnd.Next(0, 100) < 40)
+                //een 30% kans of de guest niet op tijd is
+                if (rnd.Next(0, 100) < 30)
                 {
                     Guests guests = new Guests(i, false, rnd.Next(1, 20), false, rnd.Next(0, 6));
                     guestsList.Add(guests);
@@ -87,7 +86,6 @@ namespace eventSorter
             //sorteer de groep van meeste kinderen naar minste X
             return groupList.OrderByDescending(x => x.AmountOfChildrenInGroup).ToList();
         }
-
         public int CountChildrenInGroup(Group group)
         {
             return group.AmountOfChildrenInGroup;
