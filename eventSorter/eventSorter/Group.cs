@@ -13,7 +13,9 @@ namespace eventSorter
         public int GroupId { get; set; }
         public List<Guests> GuestList { get; set; }
         private int AmountOfChildrenInGroup { get; set; }
+        public List<Guests> guestsList = new List<Guests>();
 
+        Guests guestClass = new Guests();
         public Group(int id,  List<Guests> guestList)
         {
             GroupId = id;
@@ -30,9 +32,44 @@ namespace eventSorter
             //}
             return true;
         }
-        public List<Group> CountChildrenInGroup(List<Group> groupList)
+
+        public List<Guests> makeGuests()
         {
-            Guests guestClass = new Guests();
+            Random rnd = new Random();
+            // maakt 20 tot 100 gasten aan
+            for (int i = 1; i < rnd.Next(20, 101); i++)
+            {
+                //een 40% kans of de guest niet op tijd is
+                if (rnd.Next(0, 100) < 40)
+                {
+                    Guests guests = new Guests(i, false, rnd.Next(1, 20), false, rnd.Next(0, 6));
+                    guestsList.Add(guests);
+                }
+                else
+                {
+                    Guests guests = new Guests(i, false, rnd.Next(1, 20), true, rnd.Next(0, 6));
+                    guestsList.Add(guests);
+                }
+            }
+
+            //gebruikers die onder 12 jaar zijn, wordt de isAdult op false gezet
+            for (int i = 0; i < guestsList.Count; i++)
+            {
+                guestClass.checkForAdult(guestsList[i]);
+                //check if the guest is ontime
+                if (guestClass.CheckForOnTime(guestsList[i]) == false)
+                {
+                    guestsList.RemoveAt(i);
+                    i--;
+                }
+            }
+            // Order by group_id -> ascending 
+            guestsList = guestsList.OrderBy(x => x.GroupId).ToList();
+            return guestsList;
+        }
+        public List<Group> SortGroupsInChildrenDesc(List<Group> groupList)
+        {
+            
             for (int i = 0; i < groupList.Count(); i++)
             {
                 int amountOfChildrenInGroup = 0;

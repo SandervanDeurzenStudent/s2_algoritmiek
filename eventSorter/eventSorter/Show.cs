@@ -11,12 +11,12 @@ namespace eventSorter
     {
         static void Main(string[] args)
         {
-           
+            Group group = new Group();
             Event ev = new Event();
             List < Area > areaList = ev.MakeAreas();
             
             Show show = new Show();
-            List< Group > grouplist = ev.MakeGroups(ev.makeGuests());
+            List< Group > grouplist = ev.MakeGroups(group.makeGuests());
 
             ev.PlaceGroups(grouplist, areaList);
 

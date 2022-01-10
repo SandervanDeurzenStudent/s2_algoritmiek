@@ -38,85 +38,23 @@ namespace eventSorter
             }
             return areaList;
         }
-        public List<Guests> makeGuests()
-        {
-            Random rnd = new Random();
-            // maakt 20 tot 100 gasten aan
-            for (int i = 1; i < rnd.Next(20, 101); i++)
-            {
-                //een 40% kans of de guest niet op tijd is
-                if (rnd.Next(0, 100) < 40)
-                {
-                    Guests guests = new Guests(i, false, rnd.Next(1, 20), false, rnd.Next(0, 6));
-                    guestsList.Add(guests);
-                }
-                else
-                {
-                    Guests guests = new Guests(i, false, rnd.Next(1, 20), true, rnd.Next(0,6));
-                    guestsList.Add(guests);
-                }
-            }
-
-            //gebruikers die onder 12 jaar zijn, wordt de isAdult op false gezet
-            for (int i = 0; i < guestsList.Count; i++)
-            {
-                guestClass.checkForAdult(guestsList[i]);
-                //check if the guest is ontime
-                if (guestClass.CheckForOnTime(guestsList[i]) == false)
-                {
-                    guestsList.RemoveAt(i);
-                    i--;
-                }
-            }
-            return guestsList;
-        }
+        
 
         
         public List<Group> MakeGroups(List<Guests> guestList)
         {
-            //Random _random = new Random();
-            //int originalGuests = guestList.Count;
-            //int groupId = 1;
-            //int maxGroupSize = 5;
-            //List<Group> guestGroups = new List<Group>();
-            //while (guestList.Count > maxGroupSize && guestList.Count > originalGuests / 10)
-            //{
-            //    int groupSize = _random.Next(2, maxGroupSize);
-            //    List<Guests> members = new List<Guests>();
-            //    for (int i = 0; i < groupSize; i++)
-            //    {
-            //        Guests guest = guestList[_random.Next(guestList.Count)];
-
-            //        members[i] = guest;
-            //        members[i].GroupId = groupId;
-            //        guestList.Remove(guest);
-            //    }
-
-            //    guestGroups.Add(new Group(groupId, members));
-            //    groupId++;
-            //}
-            ////the remaining guests go in to individual groups
-            //while (guestList.Count != 0)
-            //{
-            //    for (int i = 0; i < guestList.Count; i++)
-            //    {
-            //        groupId++;
-            //        //remaining guest are individual, so the group size is just 1.
-            //        List<Guests> member = new List<Guests>();
-            //        Guests guest = guestList[0];
-            //        if (guestClass.checkForAdult(guest) == true)
-            //        {
-            //            guestGroups.Add(new Group(groupId, member));
-            //            guestList.Remove(guest);
-            //        }
-            //        else
-            //        {
-            //            guestList.Remove(guest);
-            //        }
-            //    }
-            //}
-            return null;
-
+            int GroupId = 0;
+            int count = 0;
+            List<Group> guestGroups = new List<Group>();
+            for (int i = 0; i < guestList.Count; i++)
+            {
+                if (guestList[i].GroupId == GroupId)
+                {
+                    guestGroups.Add(new Group(i, guestList.Where(x => x.GroupId == count).ToList()));
+                    count++;
+                }
+            }
+            return guestGroups;
         }
        
         public bool checkAvailability(List<Seats> seatsList, List<Guests> guestList)
@@ -132,14 +70,11 @@ namespace eventSorter
             }
         }
 
-        public void addPersonsToSeat(List<Guests> guests, List<Area> areas)
-        {
-      
-        }
+       
         public void PlaceGroups(List<Group> groupList, List<Area> areaList)
         {
             // Sort the groups in amount of children in descending order
-            groupClass.CountChildrenInGroup(groupList);
+            groupClass.SortGroupsInChildrenDesc(groupList);
  
 
             ////checken of de groepen geplaatst kunnen worden in een area

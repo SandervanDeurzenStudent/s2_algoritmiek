@@ -12,22 +12,22 @@ namespace Tests
         public void makeGuest_shouldmake_GuestList()
         {
             //arrange
-            Event eventclass = new Event();
+            Group group = new Group();
             //act
-            eventclass.makeGuests();
+            group.makeGuests();
             //assert
-            Assert.AreNotEqual(eventclass.guestsList.Count, 0);
+            Assert.AreNotEqual(group.guestsList.Count, 0);
         }
 
         [Test]
         public void makeGuest_shouldReturn_Null()
         {
             //arrange
-            Event eventclass = new Event();
+            Group group = new Group();
             //act
-            eventclass.makeGuests();
+            group.makeGuests();
             //assert
-            Assert.AreNotEqual(eventclass.guestsList.Count, 0);
+            Assert.AreNotEqual(group.guestsList.Count, 0);
         }
         //Make area
         [Test]
@@ -57,9 +57,10 @@ namespace Tests
         public void makeGroups_shouldmake_Groups()
         {
             //arrange
+            Group groupClass = new Group();
             Event eventclass = new Event();
             //act
-            List <Group> group =  eventclass.MakeGroups(eventclass.makeGuests());
+            List <Group> group =  eventclass.MakeGroups(groupClass.makeGuests());
             //assert
             Assert.AreNotEqual(group.Count, 0);
         }
