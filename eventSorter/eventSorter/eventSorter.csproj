@@ -44,9 +44,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Area.cs" />
-    <Compile Include="BaseGuestsMaker.cs" />
+    <Compile Include="AreaContainer.cs" />
     <Compile Include="Event.cs" />
     <Compile Include="Group.cs" />
+    <Compile Include="GroupContainer.cs" />
     <Compile Include="Guests.cs" />
     <Compile Include="Seats.cs" />
     <Compile Include="Show.cs" />

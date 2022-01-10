@@ -34,9 +34,9 @@ namespace Tests
         public void makeAreas_shouldmake_AreaList()
         {
             //arrange
-            Event eventclass = new Event();
+            AreaContainer areaContainer = new AreaContainer();
             //act
-            List<Area> area = eventclass.MakeAreas();
+            List<Area> area = areaContainer.MakeAreas();
             //assert
             Assert.AreNotEqual(area.Count, 0);
         }
@@ -44,9 +44,9 @@ namespace Tests
         public void makeAreas_shouldgive_exception()
         {
             //arrange
-            Event eventclass = new Event();
+            AreaContainer areaContainer = new AreaContainer();
             //act
-            List<Area> area = eventclass.MakeAreas();
+            List<Area> area = areaContainer.MakeAreas();
             //assert
             Assert.AreNotEqual(area.Count, 0);
         }
@@ -58,9 +58,9 @@ namespace Tests
         {
             //arrange
             Group groupClass = new Group();
-            Event eventclass = new Event();
+            GroupContainer GroupContainerClass = new GroupContainer();
             //act
-            List <Group> group =  eventclass.MakeGroups(groupClass.makeGuests());
+            List <Group> group = GroupContainerClass.MakeGroups(groupClass.makeGuests());
             //assert
             Assert.AreNotEqual(group.Count, 0);
         }

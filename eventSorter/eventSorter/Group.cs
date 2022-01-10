@@ -13,6 +13,8 @@ namespace eventSorter
         public int GroupId { get; set; }
         public List<Guests> GuestList { get; set; }
         private int AmountOfChildrenInGroup { get; set; }
+
+        private bool isAdded { get; set; }
         public List<Guests> guestsList = new List<Guests>();
 
         Guests guestClass = new Guests();
@@ -84,6 +86,30 @@ namespace eventSorter
             }
             //sorteer de groep van meeste kinderen naar minste X
             return groupList.OrderByDescending(x => x.AmountOfChildrenInGroup).ToList();
+        }
+
+        public int CountChildrenInGroup(Group group)
+        {
+            return group.AmountOfChildrenInGroup;
+        }
+        public int CountAdultsInGroup(Group group)
+        {
+            return group.guestsList.Count - group.AmountOfChildrenInGroup;
+        }
+        public bool IsGroupAdded(Group group)
+        {
+            if (isAdded == true)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        public void AddGroup(Group group)
+        {
+            group.isAdded = true;
         }
     }
 }
