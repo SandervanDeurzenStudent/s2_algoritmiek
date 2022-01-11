@@ -15,5 +15,9 @@ namespace eventSorter
             id = AreaId;
             rowsList = RowsList;
         }
+        public Area()
+        {
+
+        }
     }
 }

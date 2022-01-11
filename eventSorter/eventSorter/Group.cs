@@ -12,7 +12,7 @@ namespace eventSorter
         //groep moet adult hebben
         public int GroupId { get; set; }
         public List<Guests> GuestList { get; set; }
-        private int AmountOfChildrenInGroup { get; set; }
+        public int AmountOfChildrenInGroup { get; set; }
 
         private bool isAdded { get; set; }
         public List<Guests> guestsList = new List<Guests>();
@@ -68,24 +68,7 @@ namespace eventSorter
             guestsList = guestsList.OrderBy(x => x.GroupId).ToList();
             return guestsList;
         }
-        public List<Group> SortGroupsInChildrenDesc(List<Group> groupList)
-        {
-            
-            for (int i = 0; i < groupList.Count(); i++)
-            {
-                int amountOfChildrenInGroup = 0;
-                for (int j = 0; j < groupList[i].GuestList.Count(); j++)
-                {
-                    if (guestClass.checkForAdult(groupList[i].GuestList[j]) == false)
-                    {
-                        amountOfChildrenInGroup++;
-                    }
-                }
-                groupList[i].AmountOfChildrenInGroup = amountOfChildrenInGroup;
-            }
-            //sorteer de groep van meeste kinderen naar minste X
-            return groupList.OrderByDescending(x => x.AmountOfChildrenInGroup).ToList();
-        }
+        
         public int CountChildrenInGroup(Group group)
         {
             return group.AmountOfChildrenInGroup;

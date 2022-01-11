@@ -36,12 +36,12 @@ namespace eventSorter
                 Console.WriteLine("AREA " + item.id);
                 foreach (var items in item.rowsList)
                 {
-                        Console.WriteLine("   ROW " + items.id);
-                        foreach (var itemss in items.seatList)
-                        {
-                            Console.WriteLine("     SEAT " + itemss.Id + " seattaken? " + itemss.seatTaken + "  " + itemss.Guest);
-                        }
-                        Console.WriteLine("_____________");
+                    Console.WriteLine("   ROW " + items.id);
+                    foreach (var itemss in items.seatList)
+                    {
+                        Console.WriteLine("     SEAT " + itemss.Id + " seattaken? " + itemss.seatTaken + "  " + itemss.Guest);
+                    }
+                    Console.WriteLine("_____________");
                 }
                 Console.WriteLine("______________________________________");
             }
@@ -50,11 +50,8 @@ namespace eventSorter
         {
             foreach (var item in groupList)
             {
-                foreach (var items in item.GuestList)
-                {
-                    Console.WriteLine(items);
-                    Console.WriteLine("**************************************************************");
-                }
+                Console.WriteLine("Group " + item.GroupId + " Children  " + item.AmountOfChildrenInGroup);
+                Console.WriteLine("Adults " + item.CountAdultsInGroup(item));
             }
             
         }

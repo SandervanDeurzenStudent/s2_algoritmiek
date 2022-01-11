@@ -12,6 +12,7 @@ namespace eventSorter
         public Guests guestClass = new Guests();
         Group groupClass = new Group();
         AreaContainer areaContainer = new AreaContainer();
+        GroupContainer groupContainerClass = new GroupContainer();
         public bool checkAvailability(List<Seats> seatsList, List<Guests> guestList)
         {
             //check of alle bezoekers een plaats hebben
@@ -27,23 +28,21 @@ namespace eventSorter
         public void PlaceGroups(List<Group> groupList, List<Area> areaList)
         {
             // Sort the groups in amount of children in descending order
-            groupClass.SortGroupsInChildrenDesc(groupList);
+           groupList = groupContainerClass.SortGroupsInChildrenDesc(groupList);
 
             //checken of de groepen geplaatst kunnen worden in een area
             for (int group = 0; group < groupList.Count; group++)
             {
-                //checks if group only has adults
-                //if (groupClass.CountChildrenInGroup(groupList[group]) == 0)
-                //{
-                //    //groep heeft geen kinderen, dus gelijk kijken of hij past
-                //}
                 for (int area = 0; area < areaList.Count; area++)
                 {
-                    if (CheckIfFrontRowIsAvailable(areaList[area], groupList[group]) == true && CheckIfOtherRowsPlacesAreAvialable(areaList[area], groupList[group]) == true && groupClass.IsGroupAdded(groupList[group]) == false)
+                    if (groupClass.IsGroupAdded(groupList[group]) == false)
                     {
-                        //whole group can be placed in the area
-                        groupClass.AddGroup(groupList[group]);
-                        addGroupsToSeats(areaList[area], groupList[group]);
+                        if (CheckIfFrontRowIsAvailable(areaList[area], groupList[group]) != null && CheckIfOtherRowsPlacesAreAvialable(areaList[area], groupList[group]) != null)
+                        {
+                            //whole group can be placed in the area
+                            groupClass.AddGroup(groupList[group]);
+                            addGroupsToSeats(areaList[area], groupList[group]);
+                        }
                     }
                 }
             }
@@ -60,34 +59,37 @@ namespace eventSorter
                 }
                 else
                 {
-                    AddAdultsOfGroupToFrontRow(area, group.GuestList[i]);
+                    AddAdultsOfGroupToOtherRows(area, group.GuestList[i]);
                 }
             }
 
         }
 
-        public bool CheckIfFrontRowIsAvailable(Area area, Group group)
+        public Area CheckIfFrontRowIsAvailable(Area area, Group group)
         {
             //List<Seats> avialableSeats = areaList[area].rowsList[row].seatList.Count -
             int amountOfTakenSeatsInFrontRow = 0;
+           
             for (int seat = 0; seat < area.rowsList[0].seatList.Count; seat++)
             {
                 if (area.rowsList[0].seatList[seat].seatTaken == true)
                 {
                     amountOfTakenSeatsInFrontRow++;
                 }
+
             }
-            // the amount of children in a group can not be higher than te amount of places in te front row
-            if (amountOfTakenSeatsInFrontRow <= groupClass.CountChildrenInGroup(group))
+           
+            if (amountOfTakenSeatsInFrontRow <= groupClass.CountChildrenInGroup(group) && area.rowsList[0].seatList.Count >= groupClass.CountChildrenInGroup(group))
             {
-                return true;
-                //check for total amountofplacesinarea
+                return area;
             }
+        // the amount of children in a group can not be higher than te amount of places in te front row
+           
                 
-            return false;
+            return null;
         }
 
-        public bool CheckIfOtherRowsPlacesAreAvialable(Area area, Group group)
+        public Area CheckIfOtherRowsPlacesAreAvialable(Area area, Group group)
         {
             //check te remaining rows
            
@@ -101,14 +103,17 @@ namespace eventSorter
                         amountOfTakenPlacesInAreaMinusFrontRow++;
                     }
                 }
-                // the amount of adults in a group can not be higher than te amount of places in the remaining rows
-                if (amountOfTakenPlacesInAreaMinusFrontRow <= groupClass.CountAdultsInGroup(group))
+                for (int i = 0; i < area.rowsList.Count; i++)
                 {
-                    return true;
+                    if (amountOfTakenPlacesInAreaMinusFrontRow <= groupClass.CountAdultsInGroup(group) && area.rowsList[i].seatList.Count >= groupClass.CountAdultsInGroup(group))
+                    {
+                        return area;
+                    }
                 }
-                break;
+                // the amount of adults in a group can not be higher than te amount of places in the remaining rows
+               
             }
-            return false;
+            return null;
         }
 
         public void AddChildrenOfGroupToFrontRow(Area area, Guests guest)
@@ -125,7 +130,7 @@ namespace eventSorter
                 }
             }
         }
-        public void AddAdultsOfGroupToFrontRow(Area area, Guests guest)
+        public void AddAdultsOfGroupToOtherRows(Area area, Guests guest)
         {
             int guestId = 1132422;
             for (int k = 1; k < area.rowsList.Count; k++)
