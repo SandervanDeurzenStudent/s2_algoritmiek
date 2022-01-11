@@ -28,7 +28,7 @@ namespace eventSorter
         public void PlaceGroups(List<Group> groupList, List<Area> areaList)
         {
             // Sort the groups in amount of children in descending order
-           groupList = groupContainerClass.SortGroupsInChildrenDesc(groupList);
+            groupList = groupContainerClass.SortGroupsInChildrenDesc(groupList);
 
             //checken of de groepen geplaatst kunnen worden in een area
             for (int group = 0; group < groupList.Count; group++)
@@ -45,9 +45,13 @@ namespace eventSorter
                         }
                     }
                 }
+                if (groupClass.IsGroupAdded(groupList[group]) == false)
+                {
+                    //EXCLUDE GROUP
+                    groupList.RemoveAt(group);
+                }
             }
-            //EXCLUDE GROUP
-            //groupList.RemoveAt(group);
+         
         }
         public void addGroupsToSeats(Area area, Group group)
         {
@@ -67,9 +71,7 @@ namespace eventSorter
 
         public Area CheckIfFrontRowIsAvailable(Area area, Group group)
         {
-            //List<Seats> avialableSeats = areaList[area].rowsList[row].seatList.Count -
             int amountOfTakenSeatsInFrontRow = 0;
-           
             for (int seat = 0; seat < area.rowsList[0].seatList.Count; seat++)
             {
                 if (area.rowsList[0].seatList[seat].seatTaken == true)
@@ -78,21 +80,16 @@ namespace eventSorter
                 }
 
             }
-           
             if (amountOfTakenSeatsInFrontRow <= groupClass.CountChildrenInGroup(group) && area.rowsList[0].seatList.Count >= groupClass.CountChildrenInGroup(group))
             {
                 return area;
             }
-        // the amount of children in a group can not be higher than te amount of places in te front row
-           
-                
             return null;
         }
 
         public Area CheckIfOtherRowsPlacesAreAvialable(Area area, Group group)
         {
             //check te remaining rows
-           
             for (int rows = 1; rows < area.rowsList.Count; rows++)
             {
                 int amountOfTakenPlacesInAreaMinusFrontRow = 0;
@@ -110,8 +107,6 @@ namespace eventSorter
                         return area;
                     }
                 }
-                // the amount of adults in a group can not be higher than te amount of places in the remaining rows
-               
             }
             return null;
         }

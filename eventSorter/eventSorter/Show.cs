@@ -31,6 +31,7 @@ namespace eventSorter
 
         public void ShowAreas(List<Area> areaList)
         {
+            
             foreach (var item in areaList)
             {
                 Console.WriteLine("AREA " + item.id);
