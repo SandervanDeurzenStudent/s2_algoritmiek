@@ -18,14 +18,14 @@ namespace eventSorter
             
             List < Area > areaList = areaContainer.MakeAreas();
             List< Group > grouplist = groupContainer.MakeGroups(group.makeGuests());
-            show.ShowGuests(grouplist);
+            
             Event ev = new Event();
             ev.PlaceGroups(grouplist, areaList);
 
             
            
             show.ShowAreas(areaList);
-            
+            show.ShowGuests(grouplist);
             Console.Read();
         }
 
@@ -39,7 +39,7 @@ namespace eventSorter
                         Console.WriteLine("   ROW " + items.id);
                         foreach (var itemss in items.seatList)
                         {
-                            Console.WriteLine("     SEAT " + itemss.Id + " seattaken? " + itemss.seatTaken);
+                            Console.WriteLine("     SEAT " + itemss.Id + " seattaken? " + itemss.seatTaken + "  " + itemss.Guest);
                         }
                         Console.WriteLine("_____________");
                 }

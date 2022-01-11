@@ -92,11 +92,12 @@ namespace eventSorter
         }
         public int CountAdultsInGroup(Group group)
         {
-            return group.guestsList.Count - group.AmountOfChildrenInGroup;
+           
+            return group.GuestList.Count - group.AmountOfChildrenInGroup;
         }
         public bool IsGroupAdded(Group group)
         {
-            if (isAdded == true)
+            if (group.isAdded == true)
             {
                 return true;
             }

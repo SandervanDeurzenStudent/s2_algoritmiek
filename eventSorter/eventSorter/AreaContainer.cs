@@ -19,7 +19,7 @@ namespace eventSorter
                 List<Rows> RowsList = new List<Rows>();
 
                 //make the Rows
-                for (int j = 0; j < rnd.Next(1, 4); j++)
+                for (int j = 0; j < rnd.Next(2, 4); j++)
                 {
                     List<Seats> SeatsList = new List<Seats>();
                     //make the seats
@@ -32,6 +32,12 @@ namespace eventSorter
                 areaList.Add(new Area(i, RowsList));
             }
             return areaList;
+        }
+
+        public Area excludeFrontRow(Area area)
+        {
+            area.rowsList.RemoveAt(0);
+            return area;
         }
     }
 }
