@@ -40,7 +40,7 @@ namespace eventSorter
                     Console.WriteLine("   ROW " + items.id);
                     foreach (var itemss in items.seatList)
                     {
-                        Console.WriteLine("     SEAT " + itemss.Id + " seattaken? " + itemss.seatTaken + "  " + itemss.Guest);
+                        Console.WriteLine("     SEAT " + itemss.Id  + "  " + itemss.Guest);
                     }
                     Console.WriteLine("_____________");
                 }

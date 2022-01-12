@@ -14,7 +14,6 @@ namespace eventSorter
         public List<Guests> GuestList { get; set; }
         public int AmountOfChildrenInGroup { get; set; }
 
-        private bool isAdded { get; set; }
         public List<Guests> guestsList = new List<Guests>();
 
         Guests guestClass = new Guests();
@@ -41,17 +40,17 @@ namespace eventSorter
         {
             Random rnd = new Random();
             // maakt 40 tot 100 gasten aan
-            for (int i = 1; i < rnd.Next(40, 101); i++)
+            for (int i = 1; i < rnd.Next(400, 1001); i++)
             {
                 //een 30% kans of de guest niet op tijd is
                 if (rnd.Next(0, 100) < 30)
                 {
-                    Guests guests = new Guests(i, false, rnd.Next(1, 20), false, rnd.Next(0, 6));
+                    Guests guests = new Guests(i, false, rnd.Next(1, 20), false, rnd.Next(0, 60));
                     guestsList.Add(guests);
                 }
                 else
                 {
-                    Guests guests = new Guests(i, false, rnd.Next(1, 20), true, rnd.Next(0, 6));
+                    Guests guests = new Guests(i, false, rnd.Next(1, 20), true, rnd.Next(0, 60));
                     guestsList.Add(guests);
                 }
             }
@@ -86,21 +85,6 @@ namespace eventSorter
         public int CountAdultsInGroup(Group group)
         {
             return group.GuestList.Count - CountChildrenInGroup(group);
-        }
-        public bool IsGroupAdded(Group group)
-        {
-            if (group.isAdded == true)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-        public void AddGroup(Group group)
-        {
-            group.isAdded = true;
         }
         public override string ToString()
         {

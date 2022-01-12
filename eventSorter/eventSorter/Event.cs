@@ -35,14 +35,11 @@ namespace eventSorter
             {
                 for (int area = 0; area < areaList.Count; area++)
                 {
-                    if (groupClass.IsGroupAdded(groupList[group]) == false)
+                    if (areaClass.CheckIfFrontRowIsAvailable(areaList[area], groupList[group]) != null && areaClass.CheckIfOtherRowsPlacesAreAvialable(areaList[area], groupList[group]) != null)
                     {
-                        if (areaClass.CheckIfFrontRowIsAvailable(areaList[area], groupList[group]) != null && areaClass.CheckIfOtherRowsPlacesAreAvialable(areaList[area], groupList[group]) != null)
-                        {
-                            //whole group can be placed in the area
-                            groupClass.AddGroup(groupList[group]);
-                            addGroupsToSeats(areaList[area], groupList[group]);
-                        }
+                        //whole group can be placed in the area
+                        addGroupsToSeats(areaList[area], groupList[group]);
+                        break;
                     }
                 }
             }
@@ -66,32 +63,27 @@ namespace eventSorter
         }
         public void AddChildrenOfGroupToFrontRow(Area area, Guests guest)
         {
-            int guestId = 123451234;
             for (int j = 0; j < area.rowsList[0].seatList.Count; j++)
             {
-                if (area.rowsList[0].seatList[j].seatTaken == false && guest.TakenSeatId != guestId)
+                if (area.rowsList[0].seatList[j].Guest == null )
                 {
-                    guest.TakenSeatId = area.rowsList[0].seatList[j].Id;
-                    guestId = area.rowsList[0].seatList[j].Id;
+                   // guest.TakenSeatId = area.rowsList[0].seatList[j].Id;
                     area.rowsList[0].seatList[j].Guest = guest;
-                    area.rowsList[0].seatList[j].seatTaken = true;
+                    break;
                 }
             }
         }
         public void AddAdultsOfGroupToOtherRows(Area area, Guests guest)
         {
-            int guestId = 1132422;
             for (int k = 1; k < area.rowsList.Count; k++)
             {
                 for (int j = 0; j < area.rowsList[k].seatList.Count; j++)
                 {
-                    if (area.rowsList[k].seatList[j].seatTaken == false && guest.TakenSeatId != guestId)
+                    if (area.rowsList[k].seatList[j].Guest == null)
                     {
                         guest.TakenSeatId = area.rowsList[k].seatList[j].Id;
-                        guestId = area.rowsList[0].seatList[j].Id;
-                        
                         area.rowsList[k].seatList[j].Guest = guest;
-                        area.rowsList[k].seatList[j].seatTaken = true;
+                        return;
                     }
                 }
             }

@@ -22,16 +22,16 @@ namespace eventSorter
         Group groupClass = new Group();
         public Area CheckIfFrontRowIsAvailable(Area area, Group group)
         {
-            int amountOfTakenSeatsInFrontRow = 0;
+            int amountOfOpenSeatsInFrontRow = 0;
             for (int seat = 0; seat < area.rowsList[0].seatList.Count; seat++)
             {
-                if (area.rowsList[0].seatList[seat].seatTaken == true)
+                if (area.rowsList[0].seatList[seat].Guest == null)
                 {
-                    amountOfTakenSeatsInFrontRow++;
+                    amountOfOpenSeatsInFrontRow++;
                 }
 
             }
-            if (amountOfTakenSeatsInFrontRow <= groupClass.CountChildrenInGroup(group) && area.rowsList[0].seatList.Count >= groupClass.CountChildrenInGroup(group))
+            if (amountOfOpenSeatsInFrontRow >= groupClass.CountChildrenInGroup(group) && area.rowsList[0].seatList.Count >= groupClass.CountChildrenInGroup(group))
             {
                 return area;
             }
@@ -42,17 +42,17 @@ namespace eventSorter
             //check te remaining rows
             for (int rows = 1; rows < area.rowsList.Count; rows++)
             {
-                int amountOfTakenPlacesInAreaMinusFrontRow = 0;
+                int amountOfOpenPlacesInAreaMinusFrontRow = 0;
                 for (int seat = 0; seat < area.rowsList[rows].seatList.Count; seat++)
                 {
-                    if (area.rowsList[rows].seatList[seat].seatTaken == true)
+                    if (area.rowsList[rows].seatList[seat].Guest == null)
                     {
-                        amountOfTakenPlacesInAreaMinusFrontRow++;
+                        amountOfOpenPlacesInAreaMinusFrontRow++;
                     }
                 }
                 for (int i = 0; i < area.rowsList.Count; i++)
                 {
-                    if (amountOfTakenPlacesInAreaMinusFrontRow <= groupClass.CountAdultsInGroup(group) && area.rowsList[i].seatList.Count >= groupClass.CountAdultsInGroup(group))
+                    if (amountOfOpenPlacesInAreaMinusFrontRow >= groupClass.CountAdultsInGroup(group) && area.rowsList[i].seatList.Count >= groupClass.CountAdultsInGroup(group))
                     {
                         return area;
                     }
