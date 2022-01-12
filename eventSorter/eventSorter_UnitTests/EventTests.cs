@@ -5,66 +5,8 @@ using eventSorter_UnitTests.mockups;
 
 namespace Tests
 {
-    public class Tests
+    public class EventTests
     {
-        //Make Guests
-        [Test]
-        public void makeGuest_shouldmake_GuestList()
-        {
-            //arrange
-            Group group = new Group();
-            //act
-            group.makeGuests();
-            //assert
-            Assert.AreNotEqual(group.guestsList.Count, 0);
-        }
-
-        [Test]
-        public void makeGuest_shouldReturn_Null()
-        {
-            //arrange
-            Group group = new Group();
-            //act
-            group.makeGuests();
-            //assert
-            Assert.AreNotEqual(group.guestsList.Count, 0);
-        }
-        //Make area
-        [Test]
-        public void makeAreas_shouldmake_AreaList()
-        {
-            //arrange
-            AreaContainer areaContainer = new AreaContainer();
-            //act
-            List<Area> area = areaContainer.MakeAreas();
-            //assert
-            Assert.AreNotEqual(area.Count, 0);
-        }
-        [Test]
-        public void makeAreas_shouldgive_exception()
-        {
-            //arrange
-            AreaContainer areaContainer = new AreaContainer();
-            //act
-            List<Area> area = areaContainer.MakeAreas();
-            //assert
-            Assert.AreNotEqual(area.Count, 0);
-        }
-
-
-        //Make groups
-        [Test]
-        public void makeGroups_shouldmake_Groups()
-        {
-            //arrange
-            Group groupClass = new Group();
-            GroupContainer GroupContainerClass = new GroupContainer();
-            //act
-            List <Group> group = GroupContainerClass.MakeGroups(groupClass.makeGuests());
-            //assert
-            Assert.AreNotEqual(group.Count, 0);
-        }
-
         //checkAvailability
         [Test]
         public void checkAvailability_should_returnTrue()
@@ -73,7 +15,7 @@ namespace Tests
             Event eventclass = new Event();
             EventMockups eventMockups = new EventMockups();
             //act
-            bool enoughPlaces = eventclass.checkAvailability(eventMockups.seatsList, eventMockups.guestList);
+            bool enoughPlaces = eventclass.checkAvailability(eventMockups.seatsList, eventMockups.guestListWithParent);
             //assert
             Assert.IsTrue(enoughPlaces);
         }
@@ -85,7 +27,7 @@ namespace Tests
             Event eventclass = new Event();
             EventMockups eventMockups = new EventMockups();
             //act
-            bool enoughPlaces = eventclass.checkAvailability(eventMockups.FalseseatsList, eventMockups.guestList);
+            bool enoughPlaces = eventclass.checkAvailability(eventMockups.FalseseatsList, eventMockups.guestListWithParent);
             //assert
             Assert.IsFalse(enoughPlaces);
         }
@@ -94,15 +36,7 @@ namespace Tests
         [Test]
         public void addGroupsToSeats_should_returnList()
         {
-            ////arrange
-            //Event eventclass = new Event();
-            //EventMockups eventMockups = new EventMockups();
-            //List<Group> groupList = new List<Group>();
-            //groupList = eventMockups.MakeGroups(eventMockups.guestList);
-            ////act
-            // eventclass.PlaceGroups(groupList, eventMockups.areaList);
-            ////assert
-            //Assert.
+            
         }
     }
 }

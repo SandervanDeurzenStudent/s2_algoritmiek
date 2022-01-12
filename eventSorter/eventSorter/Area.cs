@@ -37,5 +37,28 @@ namespace eventSorter
             }
             return null;
         }
+        public Area CheckIfOtherRowsPlacesAreAvialable(Area area, Group group)
+        {
+            //check te remaining rows
+            for (int rows = 1; rows < area.rowsList.Count; rows++)
+            {
+                int amountOfTakenPlacesInAreaMinusFrontRow = 0;
+                for (int seat = 0; seat < area.rowsList[rows].seatList.Count; seat++)
+                {
+                    if (area.rowsList[rows].seatList[seat].seatTaken == true)
+                    {
+                        amountOfTakenPlacesInAreaMinusFrontRow++;
+                    }
+                }
+                for (int i = 0; i < area.rowsList.Count; i++)
+                {
+                    if (amountOfTakenPlacesInAreaMinusFrontRow <= groupClass.CountAdultsInGroup(group) && area.rowsList[i].seatList.Count >= groupClass.CountAdultsInGroup(group))
+                    {
+                        return area;
+                    }
+                }
+            }
+            return null;
+        }
     }
 }

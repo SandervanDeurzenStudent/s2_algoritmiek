@@ -8,22 +8,41 @@ namespace eventSorter_UnitTests.mockups
 {
     public class EventMockups
     {
-        public List<Guests> guestList = new List<Guests>();
+        public List<Guests> guestListWithParent = new List<Guests>();
+        public List<Guests> guestListWithoutParent = new List<Guests>();
+        public List<Guests> guestListOnlyParents = new List<Guests>();
+
         public List<Group> groupList = new List<Group>();
-        public List<Area> areaList = new List<Area>();
+
+        public List<Area> areaListWithRowsAndSeats = new List<Area>();
+        public List<Area> areaListWithRowsAndNoSeats = new List<Area>();
+
         public List<Seats> seatsList = new List<Seats>();
+        public List<Seats> EmptyseatsList = new List<Seats>();
         public List<Seats> FalseseatsList = new List<Seats>();
         public EventMockups()
         {
-            guestList.Add(new Guests(1, false, 13, true, 1));
-            guestList.Add(new Guests(2, true, 13, false, 1));
-            guestList.Add(new Guests(3, true, 13, true, 2));
-            guestList.Add(new Guests(4, false, 13, false, 2));
-            
-            
+            //makeguestListwithParent
+            guestListWithParent.Add(new Guests(1, false, 1, true, 1));
+            guestListWithParent.Add(new Guests(2, false, 1, false, 1));
+            guestListWithParent.Add(new Guests(3, true, 15, true, 2));
+            guestListWithParent.Add(new Guests(4, false, 1, false, 2));
+            //makeGuestListWithoutParent
+            guestListWithoutParent.Add(new Guests(1, false, 1, true, 1));
+            guestListWithoutParent.Add(new Guests(2, false, 1, false, 1));
+            guestListWithoutParent.Add(new Guests(3, false, 1, true, 2));
+            guestListWithoutParent.Add(new Guests(4, false, 1, false, 2));
+            //makeGuestListWithoutParent
+            guestListOnlyParents.Add(new Guests(1, false, 15, true, 1));
+            guestListOnlyParents.Add(new Guests(2, false, 15, false, 1));
+            guestListOnlyParents.Add(new Guests(3, false, 15, true, 2));
+            guestListOnlyParents.Add(new Guests(4, false, 15, false, 2));
+
+            groupList.Add(new Group(1, guestListWithParent));
             //area
             //first make seats and rows
             List<Rows> rowsList = new List<Rows>();
+            List<Rows> rowsListNoSeats = new List<Rows>();
             seatsList.Add(new Seats(1, 1, 1));
             seatsList.Add(new Seats(2, 1, 1));
             seatsList.Add(new Seats(3, 1, 1));
@@ -47,12 +66,12 @@ namespace eventSorter_UnitTests.mockups
             {
                 rowsList.Add(new Rows(i, seatsList, 1));
             }
-            areaList.Add(new Area(1, rowsList));
+            areaListWithRowsAndSeats.Add(new Area(1, rowsList));
             for (int i = 0; i < 3; i++)
             {
-                rowsList.Add(new Rows(i, seatsList, 2));
+                rowsListNoSeats.Add(new Rows(i, EmptyseatsList, 2));
             }
-            areaList.Add(new Area(2, rowsList));
+            areaListWithRowsAndNoSeats.Add(new Area(1, rowsListNoSeats));
 
         }
         public List<Group> MakeGroups(List<Guests> guestList)
@@ -70,5 +89,6 @@ namespace eventSorter_UnitTests.mockups
             }
             return guestGroups;
         }
+        
     }
 }

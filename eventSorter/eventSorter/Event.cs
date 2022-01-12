@@ -8,7 +8,6 @@ namespace eventSorter
 {
      public class Event
     {
-
         public Guests guestClass = new Guests();
         Group groupClass = new Group();
         AreaContainer areaContainer = new AreaContainer();

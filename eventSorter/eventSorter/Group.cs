@@ -28,16 +28,19 @@ namespace eventSorter
         }
         public bool hasParent(Group guestGroup)
         {
-            //if (guestClass.checkForAdult(guest) == true)
-            //{
-            //    GroupHasAdult = true;
-            //}
-            return true;
+            for (int i = 0; i < guestGroup.GuestList.Count; i++)
+            {
+                if (guestClass.checkForAdult(guestGroup.GuestList[i]) == true)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
         public List<Guests> makeGuests()
         {
             Random rnd = new Random();
-            // maakt 20 tot 100 gasten aan
+            // maakt 40 tot 100 gasten aan
             for (int i = 1; i < rnd.Next(40, 101); i++)
             {
                 //een 30% kans of de guest niet op tijd is
@@ -70,12 +73,19 @@ namespace eventSorter
         }
         public int CountChildrenInGroup(Group group)
         {
-            return group.AmountOfChildrenInGroup;
+            int amountOfChildren = 0;
+            for (int j = 0; j < group.GuestList.Count(); j++)
+            {
+                if (guestClass.checkForAdult(group.GuestList[j]) == false)
+                {
+                    amountOfChildren++;
+                }
+            }
+            return amountOfChildren;
         }
         public int CountAdultsInGroup(Group group)
         {
-           
-            return group.GuestList.Count - group.AmountOfChildrenInGroup;
+            return group.GuestList.Count - CountChildrenInGroup(group);
         }
         public bool IsGroupAdded(Group group)
         {
