@@ -14,7 +14,6 @@ namespace eventSorter
         private bool OnTime { get; set; }
         public int GroupId { get; set; }
         public int TakenSeatId { get; set; }
-
         public Guests()
         {
 
@@ -29,7 +28,7 @@ namespace eventSorter
         }
         public override string ToString()
         {
-            return "Guest " + Id + ": " + "On Time: " + OnTime + " - " + "Is Adult: " + IsAdult + " - " + "Group ID: " + GroupId + " takenSeatId " + TakenSeatId;
+            return "Guest " + Id + " - " + "Is Adult: " + IsAdult + " - " + "Group ID: " + GroupId;
         }
         public bool checkForAdult(Guests guest)
         {

@@ -51,8 +51,8 @@ namespace eventSorter
         {
             foreach (var item in groupList)
             {
-                Console.WriteLine("Group " + item.GroupId + " Children  " + item.AmountOfChildrenInGroup);
-                Console.WriteLine("Adults " + item.CountAdultsInGroup(item));
+                Console.WriteLine(item);
+                Console.WriteLine(" ");
             }
             
         }

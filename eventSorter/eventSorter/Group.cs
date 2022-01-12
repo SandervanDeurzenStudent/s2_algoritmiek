@@ -68,7 +68,6 @@ namespace eventSorter
             guestsList = guestsList.OrderBy(x => x.GroupId).ToList();
             return guestsList;
         }
-        
         public int CountChildrenInGroup(Group group)
         {
             return group.AmountOfChildrenInGroup;
@@ -92,6 +91,10 @@ namespace eventSorter
         public void AddGroup(Group group)
         {
             group.isAdded = true;
+        }
+        public override string ToString()
+        {
+            return "Group " + GroupId + ": " + "Guests: " + GuestList.Count + " - " + "AmountOfChildren " + AmountOfChildrenInGroup;
         }
     }
 }

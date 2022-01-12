@@ -94,13 +94,15 @@ namespace Tests
         [Test]
         public void addGroupsToSeats_should_returnList()
         {
-            //arrange
-            Event eventclass = new Event();
-            EventMockups eventMockups = new EventMockups();
-            //act
-           // bool enoughPlaces = eventclass.addGroupsToSeats(eventMockups.areaList[0], eventMockups.gro);
-            //assert
-            //Assert.IsFalse(enoughPlaces);
+            ////arrange
+            //Event eventclass = new Event();
+            //EventMockups eventMockups = new EventMockups();
+            //List<Group> groupList = new List<Group>();
+            //groupList = eventMockups.MakeGroups(eventMockups.guestList);
+            ////act
+            // eventclass.PlaceGroups(groupList, eventMockups.areaList);
+            ////assert
+            //Assert.
         }
     }
 }

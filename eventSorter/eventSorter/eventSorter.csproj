@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="Area.cs" />
     <Compile Include="Containers\AreaContainer.cs" />
+    <Compile Include="Event - Copy.cs" />
     <Compile Include="Event.cs" />
     <Compile Include="Group.cs" />
     <Compile Include="Containers\GroupContainer.cs" />

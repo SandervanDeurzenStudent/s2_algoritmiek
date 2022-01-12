@@ -8,9 +8,9 @@ namespace eventSorter
 {
     public class AreaContainer
     {
-        public List<Area> areaList = new List<Area>();
         public List<Area> MakeAreas()
         {
+            List<Area> areaList = new List<Area>();
             Random rnd = new Random();
             //making the areas with rows
             for (int i = 0; i < rnd.Next(2, 6); i++)

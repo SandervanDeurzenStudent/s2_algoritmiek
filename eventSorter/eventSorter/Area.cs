@@ -19,5 +19,23 @@ namespace eventSorter
         {
 
         }
+        Group groupClass = new Group();
+        public Area CheckIfFrontRowIsAvailable(Area area, Group group)
+        {
+            int amountOfTakenSeatsInFrontRow = 0;
+            for (int seat = 0; seat < area.rowsList[0].seatList.Count; seat++)
+            {
+                if (area.rowsList[0].seatList[seat].seatTaken == true)
+                {
+                    amountOfTakenSeatsInFrontRow++;
+                }
+
+            }
+            if (amountOfTakenSeatsInFrontRow <= groupClass.CountChildrenInGroup(group) && area.rowsList[0].seatList.Count >= groupClass.CountChildrenInGroup(group))
+            {
+                return area;
+            }
+            return null;
+        }
     }
 }

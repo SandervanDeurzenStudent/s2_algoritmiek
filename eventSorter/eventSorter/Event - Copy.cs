@@ -6,14 +6,12 @@ using System.Threading.Tasks;
 
 namespace eventSorter
 {
-     public class Event
+     public class Eventt
     {
 
         public Guests guestClass = new Guests();
         Group groupClass = new Group();
-        AreaContainer areaContainer = new AreaContainer();
         GroupContainer groupContainerClass = new GroupContainer();
-        Area areaClass = new Area();
         public bool checkAvailability(List<Seats> seatsList, List<Guests> guestList)
         {
             //check of alle bezoekers een plaats hebben
@@ -36,19 +34,57 @@ namespace eventSorter
             {
                 for (int area = 0; area < areaList.Count; area++)
                 {
-                    if (groupClass.IsGroupAdded(groupList[group]) == false)
+                    if (CheckIfFrontRowIsAvailable(areaList[area], groupList[group]) != null && CheckIfOtherRowsPlacesAreAvialable(areaList[area], groupList[group]) != null)
                     {
-                        if (areaClass.CheckIfFrontRowIsAvailable(areaList[area], groupList[group]) != null && areaClass.CheckIfOtherRowsPlacesAreAvialable(areaList[area], groupList[group]) != null)
-                        {
-                            //whole group can be placed in the area
-                            groupClass.AddGroup(groupList[group]);
-                            addGroupsToSeats(areaList[area], groupList[group]);
-                        }
+                        //whole group can be placed in the area
+                        addGroupsToSeats(areaList[area], groupList[group]);
+                        break;
+                    }
+                }
+                    //EXCLUDE GROUP
+                    //groupList.RemoveAt(group);
+            }
+         
+        }
+        public Area CheckIfFrontRowIsAvailable(Area area, Group group)
+        {
+            int amountOfTakenSeatsInFrontRow = 0;
+            for (int seat = 0; seat < area.rowsList[0].seatList.Count; seat++)
+            {
+                if (area.rowsList[0].seatList[seat].seatTaken == true)
+                {
+                    amountOfTakenSeatsInFrontRow++;
+                }
+
+            }
+            if (amountOfTakenSeatsInFrontRow <= groupClass.CountChildrenInGroup(group) && area.rowsList[0].seatList.Count >= groupClass.CountChildrenInGroup(group))
+            {
+                return area;
+            }
+            return null;
+        }
+        public Area CheckIfOtherRowsPlacesAreAvialable(Area area, Group group)
+        {
+            //check te remaining rows
+            for (int rows = 1; rows < area.rowsList.Count; rows++)
+            {
+                int amountOfTakenPlacesInAreaMinusFrontRow = 0;
+                for (int seat = 0; seat < area.rowsList[rows].seatList.Count; seat++)
+                {
+                    if (area.rowsList[rows].seatList[seat].seatTaken == true)
+                    {
+                        amountOfTakenPlacesInAreaMinusFrontRow++;
+                    }
+                }
+                for (int i = 0; i < area.rowsList.Count; i++)
+                {
+                    if (amountOfTakenPlacesInAreaMinusFrontRow <= groupClass.CountAdultsInGroup(group) && area.rowsList[i].seatList.Count >= groupClass.CountAdultsInGroup(group))
+                    {
+                        return area;
                     }
                 }
             }
-            //EXCLUDE GROUP
-            //groupList.RemoveAt(group);
+            return null;
         }
         public void addGroupsToSeats(Area area, Group group)
         {
@@ -63,36 +99,31 @@ namespace eventSorter
                     AddAdultsOfGroupToOtherRows(area, group.GuestList[i]);
                 }
             }
-
         }
         public void AddChildrenOfGroupToFrontRow(Area area, Guests guest)
         {
-            int guestId = 123451234;
+            //because the first id 0, this number cannot be 0.
             for (int j = 0; j < area.rowsList[0].seatList.Count; j++)
             {
-                if (area.rowsList[0].seatList[j].seatTaken == false && guest.TakenSeatId != guestId)
+                if (area.rowsList[0].seatList[j].seatTaken == false )
                 {
-                    guest.TakenSeatId = area.rowsList[0].seatList[j].Id;
-                    guestId = area.rowsList[0].seatList[j].Id;
                     area.rowsList[0].seatList[j].Guest = guest;
                     area.rowsList[0].seatList[j].seatTaken = true;
+                    break;
                 }
             }
         }
         public void AddAdultsOfGroupToOtherRows(Area area, Guests guest)
         {
-            int guestId = 1132422;
             for (int k = 1; k < area.rowsList.Count; k++)
             {
                 for (int j = 0; j < area.rowsList[k].seatList.Count; j++)
                 {
-                    if (area.rowsList[k].seatList[j].seatTaken == false && guest.TakenSeatId != guestId)
+                    if (area.rowsList[k].seatList[j].seatTaken == false )
                     {
-                        guest.TakenSeatId = area.rowsList[k].seatList[j].Id;
-                        guestId = area.rowsList[0].seatList[j].Id;
-                        
                         area.rowsList[k].seatList[j].Guest = guest;
                         area.rowsList[k].seatList[j].seatTaken = true;
+                        return;
                     }
                 }
             }
