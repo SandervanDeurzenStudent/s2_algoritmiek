@@ -8,7 +8,7 @@ namespace eventSorter
 {
     public class Area
     {
-        public int id { get; set; }
+        private int id { get; set; }
         public List<Rows> rowsList { get; set; }
         public Area(int AreaId, List<Rows> RowsList)
         {
@@ -59,6 +59,11 @@ namespace eventSorter
                 }
             }
             return null;
+        }
+
+        public override string ToString()
+        {
+            return "AREA " + id;
         }
     }
 }

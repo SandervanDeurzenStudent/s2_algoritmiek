@@ -8,8 +8,8 @@ namespace eventSorter
 {
     public class Rows
     {
-        public int id { get; set; }
-        public int areaId { get; set; }
+        private int id { get; set; }
+        private int areaId { get; set; }
         public List<Seats> seatList { get; set; }
 
         public Rows(int RowId, List<Seats> SeatList, int AreaId)
@@ -18,7 +18,9 @@ namespace eventSorter
             seatList = SeatList;
             areaId = AreaId;
         }
-        // haal de lijst op van areas
-        // for loop van het aantal rows van die lijst en daaruit een rnd van 3 tot 10 doen
+        public override string ToString()
+        {
+            return "   ROW " + id;
+        }
     }
 }

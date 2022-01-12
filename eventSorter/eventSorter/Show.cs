@@ -31,16 +31,15 @@ namespace eventSorter
 
         public void ShowAreas(List<Area> areaList)
         {
-            
             foreach (var item in areaList)
             {
-                Console.WriteLine("AREA " + item.id);
-                foreach (var items in item.rowsList)
+                Console.WriteLine(item);
+                foreach (var row in item.rowsList)
                 {
-                    Console.WriteLine("   ROW " + items.id);
-                    foreach (var itemss in items.seatList)
+                    Console.WriteLine(row);
+                    foreach (var seat in row.seatList)
                     {
-                        Console.WriteLine("     SEAT " + itemss.Id  + "  " + itemss.Guest);
+                        Console.WriteLine(seat);
                     }
                     Console.WriteLine("_____________");
                 }
