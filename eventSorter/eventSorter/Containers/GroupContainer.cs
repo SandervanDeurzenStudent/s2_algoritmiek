@@ -11,18 +11,22 @@ namespace eventSorter
         Guests guestClass = new Guests();
         public List<Group> MakeGroups(List<Guests> guestList)
         {
-            int count = 0;
-            List<Group> guestGroups = new List<Group>();
-            
-            for (int i = 0; i < guestList.Count; i++)
+            List<Group> groups = new List<Group>();
+            int allGroups = guestList.Select(x => x.GroupId).Distinct().Count();
+
+            for (int i = 0; i < allGroups; i++)
             {
-                if (guestList[i].GroupId == count)
+                //Adds users with group id to group until the next id  
+                groups.Add(new Group
                 {
-                    guestGroups.Add(new Group(count, guestList.Where(x => x.GroupId == count).ToList()));
-                    count++;
-                }
+                    GroupId = i,
+                    GuestList = guestList.Where(x => x.GroupId == i).ToList(),
+                    
+                });
             }
-            return guestGroups;
+
+            groups = groups.OrderBy(x => x.GroupId).ToList();
+            return groups;
         }
         public List<Group> SortGroupsInChildrenDesc(List<Group> groupList)
         {

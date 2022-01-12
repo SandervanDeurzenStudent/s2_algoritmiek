@@ -14,7 +14,6 @@ namespace eventSorter
         public List<Guests> GuestList { get; set; }
         public int AmountOfChildrenInGroup { get; set; }
 
-        public List<Guests> guestsList = new List<Guests>();
 
         Guests guestClass = new Guests();
         public Group(int id,  List<Guests> guestList)
@@ -38,19 +37,21 @@ namespace eventSorter
         }
         public List<Guests> makeGuests()
         {
-            Random rnd = new Random();
+        List<Guests> guestsList = new List<Guests>();
+
+        Random rnd = new Random();
             // maakt 40 tot 100 gasten aan
-            for (int i = 1; i < rnd.Next(400, 1001); i++)
+            for (int i = 1; i < rnd.Next(60, 140); i++)
             {
                 //een 30% kans of de guest niet op tijd is
                 if (rnd.Next(0, 100) < 30)
                 {
-                    Guests guests = new Guests(i, false, rnd.Next(1, 20), false, rnd.Next(0, 60));
+                    Guests guests = new Guests(i, rnd.Next(1, 20), false, rnd.Next(0, 10));
                     guestsList.Add(guests);
                 }
                 else
                 {
-                    Guests guests = new Guests(i, false, rnd.Next(1, 20), true, rnd.Next(0, 60));
+                    Guests guests = new Guests(i, rnd.Next(1, 20), true, rnd.Next(0, 10));
                     guestsList.Add(guests);
                 }
             }

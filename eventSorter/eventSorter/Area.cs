@@ -31,7 +31,7 @@ namespace eventSorter
                 }
 
             }
-            if (amountOfOpenSeatsInFrontRow >= groupClass.CountChildrenInGroup(group) && area.rowsList[0].seatList.Count >= groupClass.CountChildrenInGroup(group))
+            if (amountOfOpenSeatsInFrontRow >= groupClass.CountChildrenInGroup(group))
             {
                 return area;
             }
@@ -52,7 +52,7 @@ namespace eventSorter
                 }
                 for (int i = 0; i < area.rowsList.Count; i++)
                 {
-                    if (amountOfOpenPlacesInAreaMinusFrontRow >= groupClass.CountAdultsInGroup(group) && area.rowsList[i].seatList.Count >= groupClass.CountAdultsInGroup(group))
+                    if (amountOfOpenPlacesInAreaMinusFrontRow >= groupClass.CountAdultsInGroup(group))
                     {
                         return area;
                     }

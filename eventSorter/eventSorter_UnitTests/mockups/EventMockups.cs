@@ -23,20 +23,20 @@ namespace eventSorter_UnitTests.mockups
         public EventMockups()
         {
             //makeguestListwithParent
-            guestListWithParent.Add(new Guests(1, false, 1, true, 1));
-            guestListWithParent.Add(new Guests(2, false, 1, false, 1));
-            guestListWithParent.Add(new Guests(3, true, 15, true, 2));
-            guestListWithParent.Add(new Guests(4, false, 1, false, 2));
+            guestListWithParent.Add(new Guests(1, 1, true, 1));
+            guestListWithParent.Add(new Guests(2, 1, false, 1));
+            guestListWithParent.Add(new Guests(3, 15, true, 2));
+            guestListWithParent.Add(new Guests(4,  1, false, 2));
             //makeGuestListWithoutParent
-            guestListWithoutParent.Add(new Guests(1, false, 1, true, 1));
-            guestListWithoutParent.Add(new Guests(2, false, 1, false, 1));
-            guestListWithoutParent.Add(new Guests(3, false, 1, true, 2));
-            guestListWithoutParent.Add(new Guests(4, false, 1, false, 2));
+            guestListWithoutParent.Add(new Guests(1,  1, true, 1));
+            guestListWithoutParent.Add(new Guests(2, 1, false, 1));
+            guestListWithoutParent.Add(new Guests(3,  1, true, 2));
+            guestListWithoutParent.Add(new Guests(4,  1, false, 2));
             //makeGuestListWithoutParent
-            guestListOnlyParents.Add(new Guests(1, false, 15, true, 1));
-            guestListOnlyParents.Add(new Guests(2, false, 15, false, 1));
-            guestListOnlyParents.Add(new Guests(3, false, 15, true, 2));
-            guestListOnlyParents.Add(new Guests(4, false, 15, false, 2));
+            guestListOnlyParents.Add(new Guests(1,  15, true, 1));
+            guestListOnlyParents.Add(new Guests(2,  15, false, 1));
+            guestListOnlyParents.Add(new Guests(3,  15, true, 2));
+            guestListOnlyParents.Add(new Guests(4,  15, false, 2));
 
             groupList.Add(new Group(1, guestListWithParent));
             //area

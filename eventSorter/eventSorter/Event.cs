@@ -13,6 +13,7 @@ namespace eventSorter
         AreaContainer areaContainer = new AreaContainer();
         GroupContainer groupContainerClass = new GroupContainer();
         Area areaClass = new Area();
+        public List<Group> failedGroups = new List<Group>();
         public bool checkAvailability(List<Seats> seatsList, List<Guests> guestList)
         {
             //check of alle bezoekers een plaats hebben
@@ -29,22 +30,39 @@ namespace eventSorter
         {
             // Sort the groups in amount of children in descending order
             groupList = groupContainerClass.SortGroupsInChildrenDesc(groupList);
-
-            //checken of de groepen geplaatst kunnen worden in een area
+            
+            
+                //checken of de groepen geplaatst kunnen worden in een area
             for (int group = 0; group < groupList.Count; group++)
             {
+                bool isAdded = false;
                 for (int area = 0; area < areaList.Count; area++)
                 {
+                    if (groupClass.CountChildrenInGroup(groupList[group]) == 0 && areaClass.CheckIfOtherRowsPlacesAreAvialable(areaList[area], groupList[group]) != null)
+                    {
+                        addGroupsToSeats(areaList[area], groupList[group]);
+                        isAdded = true;
+                        break;
+                    }
                     if (areaClass.CheckIfFrontRowIsAvailable(areaList[area], groupList[group]) != null && areaClass.CheckIfOtherRowsPlacesAreAvialable(areaList[area], groupList[group]) != null)
                     {
                         //whole group can be placed in the area
                         addGroupsToSeats(areaList[area], groupList[group]);
+                        isAdded = true;
                         break;
                     }
                 }
+                //check if the Group has been added
+                if (isAdded == false)
+                {
+                    failedGroups.Add(groupList[group]);
+                }
+                
             }
-            //EXCLUDE GROUP
-            //groupList.RemoveAt(group);
+            foreach (var item in failedGroups)
+            {
+                Console.WriteLine(item);
+            }
         }
         public void addGroupsToSeats(Area area, Group group)
         {
@@ -58,7 +76,7 @@ namespace eventSorter
                 {
                     AddAdultsOfGroupToOtherRows(area, group.GuestList[i]);
                 }
-            }
+            }   
 
         }
         public void AddChildrenOfGroupToFrontRow(Area area, Guests guest)
@@ -81,7 +99,6 @@ namespace eventSorter
                 {
                     if (area.rowsList[k].seatList[j].Guest == null)
                     {
-                        guest.TakenSeatId = area.rowsList[k].seatList[j].Id;
                         area.rowsList[k].seatList[j].Guest = guest;
                         return;
                     }

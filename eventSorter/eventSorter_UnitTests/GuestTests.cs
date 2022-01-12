@@ -15,7 +15,7 @@ namespace eventSorter_UnitTests
         public void CheckForAdult_ShouldReturn_True()
         {
             //arrange
-            Guests guest = new Guests(1, true, 14, true, 2);
+            Guests guest = new Guests(1, 14, true, 2);
             //act
             bool enoughPlaces = guestClass.checkForAdult(guest);
             //assert
@@ -26,7 +26,7 @@ namespace eventSorter_UnitTests
         public void CheckForAdult_ShouldReturn_False()
         {
             //arrange
-            Guests guest = new Guests(1, true, 3, true, 2);
+            Guests guest = new Guests(1, 3, true, 2);
             //act
             bool enoughPlaces = guestClass.checkForAdult(guest);
             //assert
@@ -37,7 +37,7 @@ namespace eventSorter_UnitTests
         public void CheckForOnTIme_ShouldReturn_True()
         {
             //arrange
-            Guests guest = new Guests(1, true, 14, true, 2);
+            Guests guest = new Guests(1, 14, true, 2);
             //act
             bool enoughPlaces = guestClass.CheckForOnTime(guest);
             //assert
@@ -48,7 +48,7 @@ namespace eventSorter_UnitTests
         public void CheckForOnTIme_ShouldReturn_False()
         {
             //arrange
-            Guests guest = new Guests(1, true, 14, false, 2);
+            Guests guest = new Guests(1, 14, false, 2);
             //act
             bool enoughPlaces = guestClass.CheckForOnTime(guest);
             //assert

@@ -13,7 +13,7 @@ namespace eventSorter
             List<Area> areaList = new List<Area>();
             Random rnd = new Random();
             //making the areas with rows
-            for (int i = 0; i < rnd.Next(2, 6); i++)
+            for (int i = 0; i < rnd.Next(2,7); i++)
             {
                 int numberOfSeats = rnd.Next(3, 11);
                 List<Rows> RowsList = new List<Rows>();
@@ -32,12 +32,6 @@ namespace eventSorter
                 areaList.Add(new Area(i, RowsList));
             }
             return areaList;
-        }
-
-        public Area excludeFrontRow(Area area)
-        {
-            area.rowsList.RemoveAt(0);
-            return area;
         }
     }
 }
