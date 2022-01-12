@@ -37,6 +37,7 @@ namespace eventSorter_UnitTests
             Assert.IsFalse(enoughPlaces);
         }
 
+        //makeGuests
         [Test]
         public void makeGuests_should_returnGuestList()
         {

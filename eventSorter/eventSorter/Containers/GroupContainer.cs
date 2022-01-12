@@ -21,7 +21,6 @@ namespace eventSorter
                 {
                     GroupId = i,
                     GuestList = guestList.Where(x => x.GroupId == i).ToList(),
-                    
                 });
             }
 

@@ -11,29 +11,31 @@ namespace eventSorter_UnitTests
     {
         Area areaClass = new Area();
         EventMockups eventMockups = new EventMockups();
+        AreaContainerMockup areaContainerMockup = new AreaContainerMockup();
         //CheckIfFrontRowIsAvialable
         [Test]
         public void CheckIfFrontRowIsAvailable_ShouldReturn_List()
         {
             //arrange
-            Area area = eventMockups.areaListWithRowsAndSeats[0];
+            List<Area> area = areaContainerMockup.MakeAreasWith100Areas100Rows100Seats();
+
             Group group = eventMockups.groupList[0];
             //act
-            area = areaClass.CheckIfFrontRowIsAvailable(area, group);
+            area[0] = areaClass.CheckIfFrontRowIsAvailable(area[0], group);
             //assert
-            Assert.AreNotEqual(area, 0);
+            Assert.AreNotEqual(area[0], 0);
         }
 
         [Test]
         public void CheckIfFrontRowIsAvailable_ShouldReturn_null()
         {
             //arrange
-            Area area = eventMockups.areaListWithRowsAndNoSeats[0];
+            List<Area> area = areaContainerMockup.MakeAreasWith1Area1Row0Seats();
             Group group = eventMockups.groupList[0];
             //act
-            area = areaClass.CheckIfFrontRowIsAvailable(area, group);
+            area[0] = areaClass.CheckIfFrontRowIsAvailable(area[0], group);
             //assert
-            Assert.AreEqual(area, null);
+            Assert.AreEqual(area[0], null);
         }
 
 
@@ -42,24 +44,25 @@ namespace eventSorter_UnitTests
         public void CheckIfOtherRowsPlacesAreAvialable_ShouldReturn_List()
         {
             //arrange
-            Area area = eventMockups.areaListWithRowsAndSeats[0];
+            List<Area> area = areaContainerMockup.MakeAreasWith100Areas100Rows100Seats();
+
             Group group = eventMockups.groupList[0];
             //act
-            area = areaClass.CheckIfOtherRowsPlacesAreAvialable(area, group);
+            area[0] = areaClass.CheckIfOtherRowsPlacesAreAvialable(area[0], group);
             //assert
-            Assert.AreNotEqual(area, 0);
+            Assert.AreNotEqual(area[0], 0);
         }
 
         [Test]
         public void CheckIfOtherRowsPlacesAreAvialable_ShouldReturn_null()
         {
             //arrange
-            Area area = eventMockups.areaListWithRowsAndNoSeats[0];
+            List<Area> area = areaContainerMockup.MakeAreasWith1Area1Row0Seats();
             Group group = eventMockups.groupList[0];
             //act
-            area = areaClass.CheckIfOtherRowsPlacesAreAvialable(area, group);
+            area[0] = areaClass.CheckIfFrontRowIsAvailable(area[0], group);
             //assert
-            Assert.AreEqual(area, null);
+            Assert.AreEqual(area[0], null);
         }
 
     }

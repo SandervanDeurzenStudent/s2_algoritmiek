@@ -12,31 +12,6 @@ namespace Tests
         AreaContainerMockup areaContainer = new AreaContainerMockup();
         GroupMockup groupClass = new GroupMockup();
 
-        //checkAvailability
-        [Test]
-        public void checkAvailability_should_returnTrue()
-        {
-            //arrange
-            Event eventclass = new Event();
-            EventMockups eventMockups = new EventMockups();
-            //act
-            bool enoughPlaces = eventclass.checkAvailability(eventMockups.seatsList, eventMockups.guestListWithParent);
-            //assert
-            Assert.IsTrue(enoughPlaces);
-        }
-        
-        [Test]
-        public void checkAvailability_should_ReturnFalse()
-        {
-            //arrange
-            Event eventclass = new Event();
-            EventMockups eventMockups = new EventMockups();
-            //act
-            bool enoughPlaces = eventclass.checkAvailability(eventMockups.FalseseatsList, eventMockups.guestListWithParent);
-            //assert
-            Assert.IsFalse(enoughPlaces);
-        }
-
         //addgroupsToList
         [Test]
         public void PlaceGroups_should_returnNothing()

@@ -14,18 +14,6 @@ namespace eventSorter
         GroupContainer groupContainerClass = new GroupContainer();
         Area areaClass = new Area();
         public List<Group> failedGroups = new List<Group>();
-        public bool checkAvailability(List<Seats> seatsList, List<Guests> guestList)
-        {
-            //check of alle bezoekers een plaats hebben
-            if (guestList.Count > seatsList.Count)
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
-        }
         public void PlaceGroups(List<Group> groupList, List<Area> areaList)
         {
             // Sort the groups in amount of children in descending order

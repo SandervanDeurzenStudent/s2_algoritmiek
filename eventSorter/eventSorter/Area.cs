@@ -29,7 +29,6 @@ namespace eventSorter
                 {
                     amountOfOpenSeatsInFrontRow++;
                 }
-
             }
             if (amountOfOpenSeatsInFrontRow >= groupClass.CountChildrenInGroup(group))
             {

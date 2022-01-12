@@ -25,7 +25,7 @@ namespace eventSorter
                     //make the seats
                     for (int k = 0; k < numberOfSeats; k++)
                     {
-                        SeatsList.Add(new Seats(k, j, i));
+                        SeatsList.Add(new Seats(k));
                     }
                     RowsList.Add(new Rows(j, SeatsList, i));
                 }

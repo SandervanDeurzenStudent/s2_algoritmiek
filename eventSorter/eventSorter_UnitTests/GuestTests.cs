@@ -11,6 +11,7 @@ namespace eventSorter_UnitTests
     {
         Guests guestClass = new Guests();
 
+        //checkfortime
         [Test]
         public void CheckForAdult_ShouldReturn_True()
         {
@@ -33,6 +34,7 @@ namespace eventSorter_UnitTests
             Assert.IsFalse(enoughPlaces);
         }
 
+        //checkfortime
         [Test]
         public void CheckForOnTIme_ShouldReturn_True()
         {

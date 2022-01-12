@@ -9,22 +9,11 @@ namespace eventSorter
     public class Seats
     {
         private int Id { get; set; }
-        private int RowId { get; set; }
-        private int Areaid { get; set; }
         public Guests Guest { get; set; }
 
-        public Seats(int id, int rowId, int areaId)
+        public Seats(int id)
         {
             Id = id;
-            RowId = RowId;
-            Areaid = areaId;
-        }
-        public Seats(int id, int rowId, int areaId, Guests guest)
-        {
-            Id = id;
-            RowId = RowId;
-            Areaid = areaId;
-            Guest = guest;
         }
 
         public override string ToString()
