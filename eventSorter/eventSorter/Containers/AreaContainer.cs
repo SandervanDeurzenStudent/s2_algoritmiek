@@ -27,7 +27,7 @@ namespace eventSorter
                     {
                         SeatsList.Add(new Seats(k));
                     }
-                    RowsList.Add(new Rows(j, SeatsList, i));
+                    RowsList.Add(new Rows(j, SeatsList));
                 }
                 areaList.Add(new Area(i, RowsList));
             }

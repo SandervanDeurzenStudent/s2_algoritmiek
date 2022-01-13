@@ -23,12 +23,10 @@ namespace eventSorter
             ev.PlaceGroups(grouplist, areaList);
 
             
-           
             show.ShowAreas(areaList);
             show.ShowGuests(grouplist);
             Console.Read();
         }
-
         public void ShowAreas(List<Area> areaList)
         {
             foreach (var item in areaList)

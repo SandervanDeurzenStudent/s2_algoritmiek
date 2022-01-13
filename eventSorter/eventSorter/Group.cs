@@ -90,7 +90,5 @@ namespace eventSorter
         {
             return "Group " + GroupId + ": " + "Guests: " + GuestList.Count + " - " + "AmountOfChildren " + AmountOfChildrenInGroup;
         }
-
-        
     }
 }

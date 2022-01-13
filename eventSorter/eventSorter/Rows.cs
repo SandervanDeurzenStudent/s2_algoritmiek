@@ -9,14 +9,12 @@ namespace eventSorter
     public class Rows
     {
         private int id { get; set; }
-        private int areaId { get; set; }
         public List<Seats> seatList { get; set; }
 
-        public Rows(int RowId, List<Seats> SeatList, int AreaId)
+        public Rows(int RowId, List<Seats> SeatList)
         {
             id = RowId;
             seatList = SeatList;
-            areaId = AreaId;
         }
         public override string ToString()
         {

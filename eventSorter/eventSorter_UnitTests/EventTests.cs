@@ -134,9 +134,9 @@ namespace Tests
 
                 //making 2 rows
             List<Rows> rowsList = new List<Rows>();
-            rowsList.Add(new Rows(0, seatList, 1));
-            rowsList.Add(new Rows(1, seatList, 1));
-            rowsList.Add(new Rows(2, EmptyseatList, 1));
+            rowsList.Add(new Rows(0, seatList));
+            rowsList.Add(new Rows(1, seatList));
+            rowsList.Add(new Rows(2, EmptyseatList));
 
                 //An Area has been made with the first rows already having a guest. This means that the new user must be added to the next row that is empty
             Area area = new Area(1, rowsList);

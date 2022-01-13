@@ -27,7 +27,7 @@ namespace eventSorter_UnitTests.mockups
                     {
                         SeatsList.Add(new Seats(k));
                     }
-                    RowsList.Add(new Rows(j, SeatsList, i));
+                    RowsList.Add(new Rows(j, SeatsList));
                 }
                 areaListWith1Area1Row1Seat.Add(new Area(i, RowsList));
             }
@@ -53,7 +53,7 @@ namespace eventSorter_UnitTests.mockups
                     {
                         SeatsList.Add(new Seats(k));
                     }
-                    RowsList.Add(new Rows(j, SeatsList, i));
+                    RowsList.Add(new Rows(j, SeatsList));
                 }
                 MakeAreasEnoughRowsAndSeats.Add(new Area(i, RowsList));
             }
@@ -79,7 +79,7 @@ namespace eventSorter_UnitTests.mockups
                     {
                         SeatsList.Add(new Seats(k));
                     }
-                    RowsList.Add(new Rows(j, SeatsList, i));
+                    RowsList.Add(new Rows(j, SeatsList));
                 }
                 areaList.Add(new Area(i, RowsList));
             }
