@@ -34,7 +34,6 @@ namespace eventSorter_UnitTests
             //act
             List<Group> groupsDesc = groupContainerClass.SortGroupsInChildrenDesc(groupList);
             //assert
-
                 //the loop keeps checking if the group above the other group in the list has more children or equal amount of childrenn
             int groupUnderOtherGroup = groupsDesc.Count - 1;
             bool hasMoreChildren = false;
