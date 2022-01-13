@@ -70,10 +70,8 @@ namespace Tests
             Assert.AreNotEqual(eventClass.failedGroups.Count, 0);
         }
 
-
-
-        //Because we did al the checks if places are avialable for the groups, these methods cant have failed returns, thats why these tests test only the correct outcome.
         //addGroupsToSeats
+        //Because we did al the checks if places are avialable for the groups, these methods cant have failed returns, thats why these tests test only the correct outcome.
         [Test]
         public void AddGroupToSeats_should_returnFilledSeat()
         {
@@ -121,7 +119,6 @@ namespace Tests
             Assert.NotNull(areaList[0].rowsList[1].seatList[0].Guest);
         }
 
-        //addAdultToSeat
         [Test]
         public void AddAdultsOfGroupToOtherRows_should_returnFilledSeat_OnOtherRow()
         {

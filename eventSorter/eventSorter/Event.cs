@@ -19,9 +19,7 @@ namespace eventSorter
         {
             // Sort the groups in amount of children in descending order
             groupList = groupContainerClass.SortGroupsInChildrenDesc(groupList);
-            
-            
-             //checken of de groepen geplaatst kunnen worden in een area
+            //checken of de groepen geplaatst kunnen worden in een area
             for (int group = 0; group < groupList.Count; group++)
             {
                 bool isAdded = false;
@@ -46,9 +44,7 @@ namespace eventSorter
                 {
                     failedGroups.Add(groupList[group]);
                 }
-                
             }
-            
         }
         public void addGroupsToSeats(Area area, Group group)
         {
