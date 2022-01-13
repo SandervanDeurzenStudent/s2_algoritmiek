@@ -19,15 +19,5 @@ namespace eventSorter_UnitTests
             //assert
             Assert.AreNotEqual(area.Count, 0);
         }
-        [Test]
-        public void makeAreas_shouldgive_exception()
-        {
-            //arrange
-            AreaContainer areaContainer = new AreaContainer();
-            //act
-            List<Area> area = areaContainer.MakeAreas();
-            //assert
-            Assert.AreNotEqual(area.Count, 0);
-        }
     }
 }

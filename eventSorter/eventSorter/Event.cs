@@ -14,13 +14,14 @@ namespace eventSorter
         GroupContainer groupContainerClass = new GroupContainer();
         Area areaClass = new Area();
         public List<Group> failedGroups = new List<Group>();
+
         public void PlaceGroups(List<Group> groupList, List<Area> areaList)
         {
             // Sort the groups in amount of children in descending order
             groupList = groupContainerClass.SortGroupsInChildrenDesc(groupList);
             
             
-                //checken of de groepen geplaatst kunnen worden in een area
+             //checken of de groepen geplaatst kunnen worden in een area
             for (int group = 0; group < groupList.Count; group++)
             {
                 bool isAdded = false;
@@ -47,10 +48,7 @@ namespace eventSorter
                 }
                 
             }
-            foreach (var item in failedGroups)
-            {
-                Console.WriteLine(item);
-            }
+            
         }
         public void addGroupsToSeats(Area area, Group group)
         {

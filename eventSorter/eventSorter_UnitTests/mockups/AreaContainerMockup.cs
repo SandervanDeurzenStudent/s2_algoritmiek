@@ -59,5 +59,31 @@ namespace eventSorter_UnitTests.mockups
             }
             return MakeAreasEnoughRowsAndSeats;
         }
+
+        public List<Area> MakeAreasWith2Areas2Rows2Seats()
+        {
+            List<Area> areaList = new List<Area>();
+            Random rnd = new Random();
+            //making the areas with rows
+            for (int i = 0; i < 2; i++)
+            {
+                int numberOfSeats = 2;
+                List<Rows> RowsList = new List<Rows>();
+
+                //make the Rows
+                for (int j = 0; j < 2; j++)
+                {
+                    List<Seats> SeatsList = new List<Seats>();
+                    //make the seats
+                    for (int k = 0; k < numberOfSeats; k++)
+                    {
+                        SeatsList.Add(new Seats(k));
+                    }
+                    RowsList.Add(new Rows(j, SeatsList, i));
+                }
+                areaList.Add(new Area(i, RowsList));
+            }
+            return areaList;
+        }
     }
 }

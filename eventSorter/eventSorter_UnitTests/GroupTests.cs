@@ -62,7 +62,6 @@ namespace eventSorter_UnitTests
             Assert.AreNotEqual(Count, 0);
         }
 
-        //countChildrenInGroup
         [Test]
         public void countChildrenInGroup_ShouldReturn_False()
         {
@@ -75,7 +74,7 @@ namespace eventSorter_UnitTests
             Assert.AreEqual(Count, 0);
         }
 
-        //countChildrenInGroup
+        //countAdultsInGroup
         [Test]
         public void countAdultsInGroup_ShouldReturn_True()
         {

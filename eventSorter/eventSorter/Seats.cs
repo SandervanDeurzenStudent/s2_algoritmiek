@@ -15,6 +15,11 @@ namespace eventSorter
         {
             Id = id;
         }
+        public Seats(int id, Guests guest)
+        {
+            Id = id;
+            Guest = guest;
+        }
 
         public override string ToString()
         {

@@ -38,7 +38,6 @@ namespace eventSorter_UnitTests
             Assert.AreEqual(area[0], null);
         }
 
-
         //CheckIfOtherRowsAreAvialable
         [Test]
         public void CheckIfOtherRowsPlacesAreAvialable_ShouldReturn_List()
