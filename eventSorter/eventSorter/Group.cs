@@ -13,8 +13,7 @@ namespace eventSorter
         public int GroupId { get; set; }
         public List<Guests> GuestList { get; set; }
         public int AmountOfChildrenInGroup { get; set; }
-
-
+        
         Guests guestClass = new Guests();
         public Group(int id,  List<Guests> guestList)
         {
@@ -91,5 +90,7 @@ namespace eventSorter
         {
             return "Group " + GroupId + ": " + "Guests: " + GuestList.Count + " - " + "AmountOfChildren " + AmountOfChildrenInGroup;
         }
+
+        
     }
 }

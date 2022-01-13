@@ -45,6 +45,10 @@ namespace eventSorter
                     failedGroups.Add(groupList[group]);
                 }
             }
+            foreach (var item in failedGroups)
+            {
+                Console.WriteLine(item);
+            }
         }
         public void addGroupsToSeats(Area area, Group group)
         {
