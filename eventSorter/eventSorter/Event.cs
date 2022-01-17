@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace eventSorter
 {
-     public class Event
+    public class Event
     {
         public Guests guestClass = new Guests();
         Group groupClass = new Group();
@@ -62,16 +62,16 @@ namespace eventSorter
                 {
                     AddAdultsOfGroupToOtherRows(area, group.GuestList[i]);
                 }
-            }   
+            }
 
         }
         public void AddChildrenOfGroupToFrontRow(Area area, Guests guest)
         {
             for (int j = 0; j < area.rowsList[0].seatList.Count; j++)
             {
-                if (area.rowsList[0].seatList[j].Guest == null )
+                if (area.rowsList[0].seatList[j].Guest == null)
                 {
-                   // guest.TakenSeatId = area.rowsList[0].seatList[j].Id;
+                    // guest.TakenSeatId = area.rowsList[0].seatList[j].Id;
                     area.rowsList[0].seatList[j].Guest = guest;
                     break;
                 }

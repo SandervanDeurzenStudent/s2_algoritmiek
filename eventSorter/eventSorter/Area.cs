@@ -20,17 +20,10 @@ namespace eventSorter
 
         }
         Group groupClass = new Group();
+        Rows RowsClass = new Rows();
         public Area CheckIfFrontRowIsAvailable(Area area, Group group)
         {
-            int amountOfOpenSeatsInFrontRow = 0;
-            for (int seat = 0; seat < area.rowsList[0].seatList.Count; seat++)
-            {
-                if (area.rowsList[0].seatList[seat].Guest == null)
-                {
-                    amountOfOpenSeatsInFrontRow++;
-                }
-            }
-            if (amountOfOpenSeatsInFrontRow >= groupClass.CountChildrenInGroup(group))
+            if (RowsClass.CountFrontRowSeats(area.rowsList[0])>= groupClass.CountChildrenInGroup(group))
             {
                 return area;
             }
@@ -41,21 +34,10 @@ namespace eventSorter
             //check te remaining rows
             for (int rows = 1; rows < area.rowsList.Count; rows++)
             {
-                int amountOfOpenPlacesInAreaMinusFrontRow = 0;
-                for (int seat = 0; seat < area.rowsList[rows].seatList.Count; seat++)
-                {
-                    if (area.rowsList[rows].seatList[seat].Guest == null)
-                    {
-                        amountOfOpenPlacesInAreaMinusFrontRow++;
-                    }
-                }
-                for (int i = 0; i < area.rowsList.Count; i++)
-                {
-                    if (amountOfOpenPlacesInAreaMinusFrontRow >= groupClass.CountAdultsInGroup(group))
+                    if (RowsClass.CountFrontRowSeats(area.rowsList[rows]) >= groupClass.CountAdultsInGroup(group))
                     {
                         return area;
                     }
-                }
             }
             return null;
         }

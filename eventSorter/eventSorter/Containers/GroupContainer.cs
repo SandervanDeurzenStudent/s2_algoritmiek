@@ -43,9 +43,8 @@ namespace eventSorter
                 }
                 groupList[i].AmountOfChildrenInGroup = amountOfChildrenInGroup;
             }
-            
+            groupList.RemoveAll(x => x.GuestList.Count - x.AmountOfChildrenInGroup == 0);
             groupList = groupList.OrderByDescending(x => x.AmountOfChildrenInGroup).ToList();
-            groupList.RemoveAll(x => x.AmountOfChildrenInGroup == 0);
             //sorteer de groep van meeste kinderen naar minste X
             return groupList;
         }

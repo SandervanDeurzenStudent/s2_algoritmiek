@@ -20,7 +20,6 @@ namespace eventSorter
             Id = id;
             Guest = guest;
         }
-
         public override string ToString()
         {
             return "     SEAT " + Id + "  " + Guest;

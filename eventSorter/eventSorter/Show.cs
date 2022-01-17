@@ -16,8 +16,8 @@ namespace eventSorter
             AreaContainer areaContainer = new AreaContainer();
             GroupContainer groupContainer = new GroupContainer();
             
-            List < Area > areaList = areaContainer.MakeAreas();
-            List< Group > grouplist = groupContainer.MakeGroups(group.makeGuests());
+            List <Area> areaList = areaContainer.MakeAreas();
+            List<Group> grouplist = groupContainer.MakeGroups(group.makeGuests());
             
             Event ev = new Event();
             ev.PlaceGroups(grouplist, areaList);

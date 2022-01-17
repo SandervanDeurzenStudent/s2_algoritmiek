@@ -16,11 +16,26 @@ namespace eventSorter
             id = RowId;
             seatList = SeatList;
         }
+        public Rows()
+        {
+
+        }
         public override string ToString()
         {
             return "   ROW " + id;
         }
 
-
+        public int CountFrontRowSeats(Rows row)
+        {
+            int amountOfOpenSeatsInFrontRow = 0;
+            for (int seat = 0; seat < row.seatList.Count; seat++)
+            {
+                if (row.seatList[seat].Guest == null)
+                {
+                    amountOfOpenSeatsInFrontRow++;
+                }
+            }
+            return amountOfOpenSeatsInFrontRow;
+        }
     }
 }
